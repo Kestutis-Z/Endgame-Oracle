@@ -6,4 +6,28 @@
   <name>Endgame Oracle</name>
   <description>
 A program to experiment with chess endgame tablebases and machine learning algorithms. </description>
+  <dependencies>
+  	<dependency>
+  		<groupId>nz.ac.waikato.cms.weka</groupId>
+  		<artifactId>weka-dev</artifactId>
+  		<version>3.7.7</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>com.google.guava</groupId>
+  		<artifactId>guava</artifactId>
+  		<version>13.0.1</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>junit</groupId>
+  		<artifactId>junit</artifactId>
+  		<version>4.11-beta-1</version>
+  		<scope>test</scope>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.mockito</groupId>
+  		<artifactId>mockito-all</artifactId>
+  		<version>1.9.5</version>
+  		<scope>test</scope>
+  	</dependency>
+  </dependencies>
 </project>
