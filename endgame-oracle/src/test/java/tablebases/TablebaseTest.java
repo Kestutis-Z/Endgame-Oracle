@@ -108,6 +108,15 @@ public class TablebaseTest {
     }
     
     @Test
+    public void testRemovingOnePieceFromTablebase() {
+	Tablebase tablebase = Tablebase.KRPKR;
+	Tablebase expectedTablebase = Tablebase.KRKP;
+	Tablebase actualTablebase = tablebase.removePiece(Piece.WHITE_ROOK);
+	
+	assertEquals(expectedTablebase, actualTablebase);
+    }
+    
+    @Test
     public void testTablebaseToStringOutput() {
 	Tablebase tablebase = Tablebase.KPK;
 	String actualString = tablebase.toString();

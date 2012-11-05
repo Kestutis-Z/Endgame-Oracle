@@ -124,6 +124,41 @@ public enum Tablebase {
 	return allPieces;
     }
     
+    /** 
+     * @return tablebase that would be obtained by removing the 
+     * specified piece from this tablebase 
+     */
+    public Tablebase removePiece(Piece piece) {
+	if (piece.getPieceType() == PieceType.KING)
+	    throw new IllegalArgumentException("Cannot remove " + piece);
+	char ch = piece.getPieceType().getPieceTypeAbbreviation();
+	char kingCh = PieceType.KING.getPieceTypeAbbreviation();
+	String oldTB = this.name();
+	String newTB = oldTB;
+
+	if (piece.getPieceColour() == PieceColour.WHITE) {
+	    for (int i = 1; oldTB.charAt(i) != kingCh; i++) {
+		if (oldTB.charAt(i) == ch) {
+		    newTB = deleteCharAt(oldTB, i);
+		    break;
+		}
+	    }
+	} else
+	    for (int i = oldTB.length() - 1; oldTB.charAt(i) != kingCh; i--) {
+		if (oldTB.charAt(i) == ch) {
+		    newTB = deleteCharAt(oldTB, i);
+		    break;
+		}
+	    }
+	return valueOf(newTB);
+    }
+
+    private String deleteCharAt(String s, int index) {
+	StringBuffer buf = new StringBuffer(s.length() - 1);
+	buf.append(s.substring(0, index)).append(s.substring(index + 1));
+	return buf.toString();
+    }
+    
     @Override
     public String toString() {
 	List<Piece> whitePieces = getWhitePieces();
@@ -144,6 +179,5 @@ public enum Tablebase {
 	
 	return output;
     }
-
     
 }
