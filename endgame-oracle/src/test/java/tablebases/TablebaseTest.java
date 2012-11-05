@@ -45,7 +45,25 @@ public class TablebaseTest {
 	Tablebase tablebase1 = Tablebase.KRKR;
 	Tablebase tablebase2 = Tablebase.KPK;
 	
-	long expectedPositionCountactualPositionCount;
+	long expectedPositionCount, actualPositionCount;
+	
+	expectedPositionCount = tablebase1.getWhiteToMovePositionCount();
+	actualPositionCount = 10780728;
+	assertEquals(expectedPositionCount, actualPositionCount);
+	
+	expectedPositionCount = tablebase1.getBlackToMovePositionCount();
+	actualPositionCount = 10780728;
+	assertEquals(expectedPositionCount, actualPositionCount);
+	
+	expectedPositionCount = tablebase2.getWhiteToMovePositionCount();
+	actualPositionCount = 163328;
+	assertEquals(expectedPositionCount, actualPositionCount);
+	
+	expectedPositionCount = tablebase2.getBlackToMovePositionCount();
+	actualPositionCount = 168024;
+	assertEquals(expectedPositionCount, actualPositionCount);
     }
+    
+   
     
 }
