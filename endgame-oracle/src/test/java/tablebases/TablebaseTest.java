@@ -70,7 +70,16 @@ public class TablebaseTest {
 	Tablebase tablebase1 = Tablebase.KRPKR;
 	Piece[] expectedPieces = new Piece[] { Piece.WHITE_KING, 
 		Piece.WHITE_ROOK, Piece.WHITE_PAWN };	
-	Piece[] actualPieces = (Piece[]) tablebase1.getWhitePieces().toArray(new Piece[0]);
+	Piece[] actualPieces = tablebase1.getWhitePieces().toArray(new Piece[0]);
+	
+	assertArrayEquals(expectedPieces, actualPieces);	
+    }
+    
+    @Test
+    public void testGetBlackPieces() {
+	Tablebase tablebase1 = Tablebase.KRPKR;
+	Piece[] expectedPieces = new Piece[] { Piece.BLACK_KING, Piece.BLACK_ROOK };	
+	Piece[] actualPieces = tablebase1.getBlackPieces().toArray(new Piece[0]);
 	
 	assertArrayEquals(expectedPieces, actualPieces);	
     }

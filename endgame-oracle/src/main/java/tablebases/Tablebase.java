@@ -116,4 +116,11 @@ public enum Tablebase {
 	return count;
     }
     
+    /** @return list of Black pieces for this tablebase */
+    public List<Piece> getBlackPieces() {
+	char[] blackPiecesAsChars = getPiecesAsCharsFromTablebase(PieceColour.BLACK);
+	List<Piece> blackPieces = new ArrayList<Piece>();
+	blackPieces = convertCharsToPieces(blackPiecesAsChars, PieceColour.BLACK);
+	return blackPieces;    
+    }
 }
