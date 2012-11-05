@@ -44,15 +44,7 @@ public enum Tablebase {
     /** @return number of black-to-move positions in tablebase */
     public long getBlackToMovePositionCount() {
 	return totalBlackToMovePositions;
-    }  
-
-    /** 
-     * @return number of pieces (White and Black) that 
-     * a chess position from this tablebase contains.
-     */
-    public int chessPiecesCount() {
-	return this.name().length();
-    }    
+    }     
 
     /** @return list of White pieces for this tablebase */
     public List<Piece> getWhitePieces() {
@@ -124,6 +116,14 @@ public enum Tablebase {
 	return blackPieces;    
     }
     
+    /** @return list of all (White followed by Black) pieces for this tablebase */
+    public List<Piece> getAllPieces() {
+	List<Piece> allPieces = new ArrayList<>();
+	allPieces.addAll(getWhitePieces());
+	allPieces.addAll(getBlackPieces());
+	return allPieces;
+    }
+    
     @Override
     public String toString() {
 	List<Piece> whitePieces = getWhitePieces();
@@ -144,5 +144,6 @@ public enum Tablebase {
 	
 	return output;
     }
+
     
 }
