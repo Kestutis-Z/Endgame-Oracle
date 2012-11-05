@@ -64,6 +64,10 @@ public class TablebaseTest {
 	assertEquals(expectedPositionCount, actualPositionCount);
     }
     
-   
+    @Test
+    public void testGetWhitePieces() {
+	Tablebase tablebase1 = Tablebase.KRPKR;
+	Piece[] expectedPieces = new Piece[];
+    }
     
 }
