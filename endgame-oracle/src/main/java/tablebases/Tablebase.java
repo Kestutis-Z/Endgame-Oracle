@@ -123,4 +123,26 @@ public enum Tablebase {
 	blackPieces = convertCharsToPieces(blackPiecesAsChars, PieceColour.BLACK);
 	return blackPieces;    
     }
+    
+    @Override
+    public String toString() {
+	List<Piece> whitePieces = getWhitePieces();
+	List<Piece> blackPieces = getBlackPieces();
+
+	String output = "";
+	output += whitePieces.get(0).getPieceType().name();
+	for (int i = 1; i < whitePieces.size(); i++) {
+	    output += " + ";
+	    output += whitePieces.get(i).getPieceType().name();
+	}
+	output += " vs. ";
+	output += blackPieces.get(0).getPieceType().name();
+	for (int i = 1; i < blackPieces.size(); i++) {
+	    output += " + ";
+	    output += blackPieces.get(i).getPieceType().name();
+	}
+	
+	return output;
+    }
+    
 }

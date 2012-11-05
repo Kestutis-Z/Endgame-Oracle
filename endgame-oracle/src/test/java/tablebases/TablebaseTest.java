@@ -99,4 +99,13 @@ public class TablebaseTest {
 	assertArrayEquals(expectedDuplicates, actualDuplicates);	
     }
     
+    @Test
+    public void testTablebaseToStringOutput() {
+	Tablebase tablebase = Tablebase.KPK;
+	String actualString = tablebase.toString();
+	String expectedString = "KING + PAWN vs. KING";
+	
+	assertEquals(expectedString, actualString);
+    }
+    
 }
