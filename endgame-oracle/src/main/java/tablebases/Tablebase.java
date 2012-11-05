@@ -10,11 +10,35 @@ import chess.PieceColour;
  */
 public enum Tablebase {
     
-    KK,
+    KK(0, 0),
+    KRK(175168, 223944),
+    KPK(163328, 168024),
+    KRKR(10780728, 10780728),
+    KRKP(8100040, 9963008),    
+    KRPK(7877172, 10249464),
+    KRPKR(476609388, 490095548) 
     
-    KRK, 
+    // TODO all the remaining tablebases
     
-    KRPKR;
+    ;
+
+    private final long totalWhiteToMovePositions; 
+    private final long totalBlackToMovePositions;
+    
+    private Tablebase(long wCount, long bCount) {
+	totalWhiteToMovePositions = wCount;
+	totalBlackToMovePositions = bCount;
+    }
+
+    /** @return number of white-to-move positions in tablebase */
+    public long getWhiteToMovePositionCount() {
+	return totalWhiteToMovePositions;
+    }
+
+    /** @return number of black-to-move positions in tablebase */
+    public long getBlackToMovePositionCount() {
+	return totalBlackToMovePositions;
+    }  
 
     /** 
      * @return number of pieces (White and Black) that 
@@ -44,4 +68,5 @@ public enum Tablebase {
 		? tablebaseName.substring(0, blackKingsIndex).toCharArray() 
 		: tablebaseName.substring(blackKingsIndex).toCharArray();
     }
+    
 }

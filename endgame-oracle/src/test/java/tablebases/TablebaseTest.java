@@ -40,4 +40,12 @@ public class TablebaseTest {
 	assertArrayEquals(expectedBlackPieces2, actualBlackPieces2);
     }
     
+    @Test
+    public void testGetTablebasePositionCount() {
+	Tablebase tablebase1 = Tablebase.KRKR;
+	Tablebase tablebase2 = Tablebase.KPK;
+	
+	long expectedPositionCountactualPositionCount;
+    }
+    
 }
