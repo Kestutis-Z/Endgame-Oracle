@@ -84,4 +84,19 @@ public class TablebaseTest {
 	assertArrayEquals(expectedPieces, actualPieces);	
     }
     
+    @Test
+    public void testGetConsequtiveDuplicateCharsInArrayUpToIndex() {
+	char[] chArr = { 'K', 'Q', 'Q', 'P', 'P', 'P', 'P' };
+	
+	int[] actualDuplicates = new int[chArr.length];
+	for (int i = 0; i < actualDuplicates.length; i++) {
+	    actualDuplicates[i] = 
+		    Tablebase.getConsequtiveDuplicateCharsInArrayUpToIndex(chArr, i);
+	}
+	
+	int[] expectedDuplicates = { 1, 1, 2, 1, 2, 3, 4 };
+	
+	assertArrayEquals(expectedDuplicates, actualDuplicates);	
+    }
+    
 }
