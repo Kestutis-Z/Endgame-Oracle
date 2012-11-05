@@ -1,10 +1,16 @@
 package tablebases;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import chess.Piece;
 import chess.PieceColour;
+import chess.PieceType;
 
 /**
  * Computerized database containing all possible legal chess positions 
  * and their evaluations, given the set of specific chess pieces. 
+ * 
  * @author Kestutis
  *
  */
@@ -46,8 +52,16 @@ public enum Tablebase {
      */
     public int chessPiecesCount() {
 	return this.name().length();
-    }
+    }    
 
+    /** @return list of White pieces for this tablebase */
+    public List<Piece> getWhitePieces() {
+	char[] whitePiecesAsChars = getPiecesAsCharsFromTablebase(PieceColour.WHITE);
+	List<Piece> whitePieces = new ArrayList<Piece>();
+	whitePieces = convertCharsToPieces(whitePiecesAsChars, PieceColour.WHITE);
+	return whitePieces;
+    }
+    
     /**
      * Tablebases' names consist of lists of upper-case letters, 
      * corresponding to the abbreviations of abstract pieces. White pieces 
@@ -67,6 +81,39 @@ public enum Tablebase {
 	return pieceColour == PieceColour.WHITE 
 		? tablebaseName.substring(0, blackKingsIndex).toCharArray() 
 		: tablebaseName.substring(blackKingsIndex).toCharArray();
+    }
+
+    protected static List<Piece> convertCharsToPieces(char[] piecesAsChars, PieceColour pieceColour) {
+	List<Piece> pieces = new ArrayList<>();
+	String pieceCol = pieceColour.name();
+	
+	for (int i = 0; i < piecesAsChars.length; i++) {
+	    char ch = piecesAsChars[i];
+	    String pieceName = pieceCol;
+	    pieceName += "_";
+	    pieceName += PieceType.getPieceTypeFromAbbreviation(ch).name();
+	  
+	    int consequtiveDuplicateCharsInArrayUpToIndex = 
+		    getConsequtiveDuplicateCharsInArrayUpToIndex(piecesAsChars, i);
+	    if (consequtiveDuplicateCharsInArrayUpToIndex > 1) {
+		pieceName += "_";
+		pieceName += consequtiveDuplicateCharsInArrayUpToIndex;
+	    }
+	    pieces.add(Piece.valueOf(pieceName));
+	}
+	
+	return pieces;
+    }
+
+    protected static int getConsequtiveDuplicateCharsInArrayUpToIndex(
+	    char[] piecesAsChars, int i) {
+	if (i == 0)
+	    return 1;
+	int count = 1;
+	for (int j = i-1; piecesAsChars[i] == piecesAsChars[j] && j >= 0; j--) {
+	    count++;
+	}
+	return count;
     }
     
 }

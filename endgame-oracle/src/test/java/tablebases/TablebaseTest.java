@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import chess.Piece;
 import chess.PieceColour;
 
 public class TablebaseTest {
@@ -67,7 +68,11 @@ public class TablebaseTest {
     @Test
     public void testGetWhitePieces() {
 	Tablebase tablebase1 = Tablebase.KRPKR;
-	Piece[] expectedPieces = new Piece[];
+	Piece[] expectedPieces = new Piece[] { Piece.WHITE_KING, 
+		Piece.WHITE_ROOK, Piece.WHITE_PAWN };	
+	Piece[] actualPieces = (Piece[]) tablebase1.getWhitePieces().toArray(new Piece[0]);
+	
+	assertArrayEquals(expectedPieces, actualPieces);	
     }
     
 }

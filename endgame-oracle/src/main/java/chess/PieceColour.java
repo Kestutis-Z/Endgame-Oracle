@@ -2,7 +2,8 @@ package chess;
 
 /**
  * Chess piece colour - each piece can be of 
- * one of the two listed colours. 
+ * one of the two listed colours.
+ *  
  * @author Kestutis
  *
  */
