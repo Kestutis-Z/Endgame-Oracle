@@ -6,10 +6,15 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-/** Chessboard square that can be empty or occupied by one of the chess 
+/**
+ * Chessboard square that can be empty or occupied by one of the chess 
  * pieces. There are 64 squares on the chessboard. Each square can be 
  * uniquely identified by its file (a, b, c, d, e, f, g, or h, corresponding 
- * to integers from 1 to 8) and rank (1, 2, ..., 8). */
+ * to integers from 1 to 8) and rank (1, 2, ..., 8). 
+
+ * @author Kestutis
+ *
+ */
 public enum Square {
     
     A8(18), B8(28), C8(38), D8(48), E8(58), F8(68), G8(78), H8(88), 
