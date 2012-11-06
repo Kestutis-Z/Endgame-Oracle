@@ -110,9 +110,21 @@ public class TablebaseTest {
     @Test
     public void testRemovingOnePieceFromTablebase() {
 	Tablebase tablebase = Tablebase.KRPKR;
-	Tablebase expectedTablebase = Tablebase.KRKP;
-	Tablebase actualTablebase = tablebase.removePiece(Piece.WHITE_ROOK);
 	
+	Tablebase expectedTablebase = Tablebase.KRKP;
+	Tablebase actualTablebase = tablebase.removePiece(Piece.WHITE_ROOK);	
+	assertEquals(expectedTablebase, actualTablebase);
+	
+	expectedTablebase = Tablebase.KRK;
+	actualTablebase = tablebase.removePiece(Piece.WHITE_PAWN).removePiece(Piece.WHITE_ROOK);
+	assertEquals(expectedTablebase, actualTablebase);
+	
+	expectedTablebase = Tablebase.KPK;
+	actualTablebase = tablebase.removePiece(Piece.BLACK_ROOK).removePiece(Piece.WHITE_ROOK);
+	assertEquals(expectedTablebase, actualTablebase);
+	
+	expectedTablebase = Tablebase.KK;
+	actualTablebase = actualTablebase.removePiece(Piece.WHITE_PAWN);
 	assertEquals(expectedTablebase, actualTablebase);
     }
     

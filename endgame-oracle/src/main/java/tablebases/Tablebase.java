@@ -69,6 +69,11 @@ public enum Tablebase {
      */
     protected char[] getPiecesAsCharsFromTablebase(PieceColour pieceColour) {
 	String tablebaseName = this.name();
+	return extractCharsFromTablebaseName(pieceColour, tablebaseName);
+    }
+
+    private char[] extractCharsFromTablebaseName(PieceColour pieceColour,
+	    String tablebaseName) {
 	int blackKingsIndex = tablebaseName.lastIndexOf("K");
 	return pieceColour == PieceColour.WHITE 
 		? tablebaseName.substring(0, blackKingsIndex).toCharArray() 
@@ -150,6 +155,8 @@ public enum Tablebase {
 		    break;
 		}
 	    }
+	if (!whitePiecesAreRelativelyMoreValuableThanBlackPiecesIn(newTB))
+		newTB = reverseWhiteAndBlackPieces(newTB);
 	return valueOf(newTB);
     }
 
@@ -157,6 +164,50 @@ public enum Tablebase {
 	StringBuffer buf = new StringBuffer(s.length() - 1);
 	buf.append(s.substring(0, index)).append(s.substring(index + 1));
 	return buf.toString();
+    }
+    
+    /**
+     * By convention, White pieces are relatively more 
+     * valuable in tablebases. For example, there is no 
+     * tablebase KPKQ ("White King + White Pawn vs. 
+     * Black King + Black Queen"), since the Queen is relatively more 
+     * valuable than the Pawn - instead the KQKP tablebase 
+     * is used and chessboard symmetry exploited. 
+     */
+    private boolean whitePiecesAreRelativelyMoreValuableThanBlackPiecesIn(
+	    String tablebaseName) {
+	char[] whitePiecesAsChars = extractCharsFromTablebaseName(
+		PieceColour.WHITE, tablebaseName);	
+	char[] blackPiecesAsChars = extractCharsFromTablebaseName(
+		PieceColour.BLACK, tablebaseName);
+	
+	int whitePiecesCount = whitePiecesAsChars.length;
+	int blackPiecesCount = blackPiecesAsChars.length;	
+	int smallerOrEqualOfWhitePiecesCountAndBlackPiecesCount =
+		whitePiecesCount < blackPiecesCount ? 
+		whitePiecesCount : blackPiecesCount;
+	
+	for (int i = 1 /* both 0th elements are Kings */; 
+		i < smallerOrEqualOfWhitePiecesCountAndBlackPiecesCount; i++) {
+	    char whitePieceAbbreviation = whitePiecesAsChars[i];
+	    char blackPieceAbbreviation = blackPiecesAsChars[i];
+	    PieceType whitePc = PieceType.getPieceTypeFromAbbreviation(whitePieceAbbreviation);
+	    PieceType blackPc = PieceType.getPieceTypeFromAbbreviation(blackPieceAbbreviation);
+	    if (whitePc.ordinal() < blackPc.ordinal())
+		return true;
+	    if (whitePc.ordinal() > blackPc.ordinal())
+		return false;	    
+	}	
+	
+	return whitePiecesCount >= blackPiecesCount ? true : false;
+    }
+    
+    private String reverseWhiteAndBlackPieces(String tablebaseName) {
+	char[] whitePiecesAsChars = extractCharsFromTablebaseName(
+		PieceColour.WHITE, tablebaseName);	
+	char[] blackPiecesAsChars = extractCharsFromTablebaseName(
+		PieceColour.BLACK, tablebaseName);
+	return new String(blackPiecesAsChars) + new String (whitePiecesAsChars);
     }
     
     @Override
