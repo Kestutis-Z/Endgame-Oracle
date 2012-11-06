@@ -48,13 +48,13 @@ public class ChessPositionTest {
     }
 
     @Test
-    public void getPiecesAndSquaresMapTest1() {	
+    public void testGetPiecesAndSquaresMap() {	
 	mockedChessPosition.getPiecesWithSquares();
 	verify(mockedChessPosition).getPiecesWithSquares();
     }
     
     @Test(expected = IllegalArgumentException.class)
-    public void getSquaresToPiecesMapThrowsIllegalArgumentExceptionTest1() {
+    public void testGetSquaresToPiecesMapThrowsIllegalArgumentException() {
 	List<Square> squares2 = new ArrayList<>();
 	squares2.add(Square.E5);
 	squares2.add(Square.E5);
@@ -70,7 +70,7 @@ public class ChessPositionTest {
     }
     
     @Test(expected = IllegalArgumentException.class)
-    public void getPiecesToSquaresThrowsIllegalArgumentExceptionTest2() {
+    public void testGetPiecesToSquaresThrowsIllegalArgumentException() {
 	List<Square> squares3 = new ArrayList<>();
 	squares3.add(Square.E3);
 	squares3.add(Square.D5);
@@ -86,7 +86,7 @@ public class ChessPositionTest {
     }
     
     @Test
-    public void getWhitePiecesTest() {
+    public void testGetWhitePieces() {
 	List<Piece> expectedWhitePiecesKRPKR = new ArrayList<>();
 	expectedWhitePiecesKRPKR.add(Piece.WHITE_KING);
 	expectedWhitePiecesKRPKR.add(Piece.WHITE_ROOK);
@@ -107,7 +107,7 @@ public class ChessPositionTest {
     }
     
     @Test
-    public void getBlackPiecesTest() {
+    public void testGetBlackPieces() {
 	List<Piece> expectedBlackPiecesKRPKR = new ArrayList<>();
 	expectedBlackPiecesKRPKR.add(Piece.BLACK_KING);
 	expectedBlackPiecesKRPKR.add(Piece.BLACK_ROOK);
@@ -128,7 +128,7 @@ public class ChessPositionTest {
     }
     
     @Test
-    public void getWhiteSquaresTest() {
+    public void testGetWhiteSquares() {
 	List<Square> expectedWhiteSquaresKRPKR = new ArrayList<>();
 	expectedWhiteSquaresKRPKR.add(Square.E5);
 	expectedWhiteSquaresKRPKR.add(Square.E3);
@@ -149,7 +149,7 @@ public class ChessPositionTest {
     }
     
     @Test
-    public void getBlackSquaresTest() {
+    public void testGetBlackSquares() {
 	List<Square> expectedBlackSquaresKRPKR = new ArrayList<>();
 	expectedBlackSquaresKRPKR.add(Square.H8);
 	expectedBlackSquaresKRPKR.add(Square.D1);

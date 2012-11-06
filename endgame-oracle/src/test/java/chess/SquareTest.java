@@ -43,7 +43,7 @@ public class SquareTest {
     }
 
     @Test
-    public void getSquareIDTest() {
+    public void testGetSquareID() {
 	int[] expectedIDs = new int[] { 11, 53, 88 };
 	int[] actualIDs = new int[testedSquaresCount];
 	for (int i = 0; i < testedSquaresCount; i++) {
@@ -54,7 +54,7 @@ public class SquareTest {
     }
     
     @Test
-    public void getSquareFileTest() {
+    public void testGetSquareFile() {
 	int[] expectedFiles = new int[] { 1, 5, 8 };
 	int[] actualFiles = new int[testedSquaresCount];
 	for (int i = 0; i < testedSquaresCount; i++) {
@@ -65,7 +65,7 @@ public class SquareTest {
     }
     
     @Test
-    public void getSquareRankTest() {
+    public void testGetSquareRank() {
 	int[] expectedRanks = new int[] { 1, 3, 8 };
 	int[] actualRanks = new int[testedSquaresCount];
 	for (int i = 0; i < testedSquaresCount; i++) {
@@ -76,7 +76,7 @@ public class SquareTest {
     }
     
     @Test
-    public void getSquareFromFileAndRankTest() {
+    public void testGetSquareFromFileAndRank() {
 	Square[] expectedSquares = testedSquares;
 	Square[] actualSquares = new Square[] {
 	    Square.getSquareFromFileAndRank(1, 1),
@@ -88,12 +88,12 @@ public class SquareTest {
     }
     
     @Test(expected = IllegalArgumentException.class)
-    public void getSquareFromFileAndRankThrowsIllegalArgumentExceptionTest() {
+    public void testGetSquareFromFileAndRankThrowsIllegalArgumentException() {
 	Square.getSquareFromFileAndRank(0, 1);	    
     }
 
     @Test
-    public void getSquareFromID() {
+    public void testGetSquareFromID() {
 	Square[] expectedSquares = testedSquares;
 	Square[] actualSquares = new Square[] {
 	    Square.getSquareFromID(11),
@@ -105,12 +105,12 @@ public class SquareTest {
     }
     
     @Test(expected = IllegalArgumentException.class)
-    public void getSquareFromIDThrowsIllegalArgumentExceptionTest() {
+    public void testGetSquareFromIDThrowsIllegalArgumentException() {
 	Square.getSquareFromID(0);	    
     }
     
     @Test
-    public void hasAdjacentSquareToTest() {
+    public void testThisSquareHasAdjacentSquare() {
 	for (Direction dir : allDirectionsClockwiseFromEastToNorthEast) {
 	    assertTrue(squareE3.hasAdjacentSquareTo(dir));	    
 	}
@@ -135,7 +135,7 @@ public class SquareTest {
     }
     
     @Test 
-    public void getAdjacentSquareTest() {
+    public void testGetAdjacentSquare() {
 	Square[] expectedSquaresToTheEast = new Square[] { Square.B1, Square.F3 };
 	Square[] actualSquaresToTheEast = new Square[] {
 		squareA1.getAdjacentSquare(Direction.EAST), 
@@ -144,14 +144,14 @@ public class SquareTest {
     }
     
     @Test 
-    public void containsPieceTest() {
+    public void testSquareContainsPiece() {
 	assertFalse(squareA1.containsPiece(chessPosition1));
 	assertFalse(squareE3.containsPiece(chessPosition1));
 	assertTrue(squareH8.containsPiece(chessPosition1));
     }
     
     @Test 
-    public void rangeOfSquaresEndsWithPieceTest() {	
+    public void testRangeOfSquaresEndsWithPiece() {	
 	List<Square> expectedRange = new ArrayList<>();
 	expectedRange.add(Square.B1);
 	expectedRange.add(Square.C1);
@@ -163,7 +163,7 @@ public class SquareTest {
     }
     
     @Test 
-    public void rangeOfSquaresEndsChessboardEdgeTest() {	
+    public void testRangeOfSquaresEndsChessboardEdge() {	
 	List<Square> expectedRange = new ArrayList<>();
 	expectedRange.add(Square.F2);
 	expectedRange.add(Square.G1);
@@ -175,7 +175,7 @@ public class SquareTest {
     }
     
     @Test 
-    public void rangeOfSquaresIsEmptyTest() {	
+    public void testRangeOfSquaresIsEmpty() {	
 	List<Square> expectedRange = new ArrayList<>();
 	
 	List<Square> actualRange = squareH8.rangeOfSquares(chessPosition1, Direction.NORTHWEST);
@@ -188,7 +188,7 @@ public class SquareTest {
     }
     
     @Test 
-    public void getSquareAtTheEndOfRangeTest() {
+    public void testGetSquareAtTheEndOfRange() {
 	Square[] expectedSquares = { Square.E5, Square.H8, Square.B8, Square.A8 };
 	
 	Square sq1 = null, sq2 = null, sq3 = null, sq4 = null;
@@ -206,7 +206,7 @@ public class SquareTest {
     }
     
     @Test(expected = SquareHasNoAdjacentSquareException.class) 
-    public void getSquareAtTheEndOfRangeThrowsSquareHasNoAdjacentSquareExceptionTest() 
+    public void testGetSquareAtTheEndOfRangeThrowsSquareHasNoAdjacentSquareException() 
 	    throws SquareHasNoAdjacentSquareException {
 	Square sq = null;
 	try {
@@ -220,7 +220,7 @@ public class SquareTest {
     }
     
     @Test 
-    public void getPieceTest() {
+    public void testGetPiece() {
 	Piece[] expectedPieces = { Piece.WHITE_KING, Piece.BLACK_KING, Piece.BLACK_ROOK };
 	
 	Piece pc1 = null, pc2 = null, pc3 = null;
@@ -237,7 +237,7 @@ public class SquareTest {
     }
     
     @Test(expected = SquareContainsNoPiecesException.class) 
-    public void getPieceThrowsSquareContainsNoPiecesExceptionTest() 
+    public void testGetPieceThrowsSquareContainsNoPiecesException() 
 	    throws SquareContainsNoPiecesException {
 	Piece pc = null;
 	try {
@@ -251,7 +251,7 @@ public class SquareTest {
     }
     
     @Test 
-    public void getPieceAtTheEndOfRangeTest() 
+    public void testGetPieceAtTheEndOfRange() 
 	    throws SquareHasNoAdjacentSquareException, SquareContainsNoPiecesException {
 	Piece[] expectedPieces = { Piece.WHITE_KING, Piece.WHITE_KING, Piece.BLACK_ROOK };
 	
@@ -264,13 +264,13 @@ public class SquareTest {
     }
     
     @Test 
-    public void isAdjacentTest() {
+    public void testSquareIsAdjacentToOtherSquare() {
 	assertTrue(squareA1.isAdjacent(Square.A2));
 	assertFalse(squareA1.isAdjacent(squareE3));
     }
     
     @Test 
-    public void getRectangleZoneTest() {
+    public void testGetRectangleZone() {
 	Set<Square> expectedSquares = new HashSet<Square>();
 	expectedSquares.add(Square.A1);
 	expectedSquares.add(Square.A2);
