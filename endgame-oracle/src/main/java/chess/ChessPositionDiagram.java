@@ -83,9 +83,11 @@ public class ChessPositionDiagram {
 	    throw new IncorrectChessDiagramDrawingException("Incorrect rank in middle third: was " +
 	    		"expected " + rank + " but obtained" + (middleThird.charAt(2) - '0'));
 	for (int file = 1; file <= 8; file++) {	   
-	    String pieceAbbreviation = middleThird.substring(7*(file - 1) + 6, 7*(file - 1) + 9);	    
+	    String pieceAbbreviation = Character.isDigit(middleThird.charAt(7 * (file - 1) + 8)) 
+		    ? middleThird.substring(7 * (file - 1) + 6, 7 * (file - 1) + 9) 
+			    : middleThird.substring(7 * (file - 1) + 6, 7 * (file - 1) + 8);
 	    if (!(Piece.allAbbreviationsOfPieces().contains(pieceAbbreviation)
-		    && !pieceAbbreviation.equals("   ")))		    
+		    || pieceAbbreviation.equals("  ")))		    
 		throw new IncorrectChessDiagramDrawingException("Incorrect piece " +
 				"abbreviation in file " + file + ", rank " + 
 				rank + ": " + pieceAbbreviation);		    		
