@@ -7,11 +7,11 @@ package chess;
  * @author Kestutis
  *
  */
-public class IncorrectChessDiagramException extends Exception {
+public class IncorrectChessDiagramDrawingException extends Exception {
 
     private static final long serialVersionUID = 1L;
 
-    public IncorrectChessDiagramException(String message) {
+    public IncorrectChessDiagramDrawingException(String message) {
         super("\n" + message);
     }
 }

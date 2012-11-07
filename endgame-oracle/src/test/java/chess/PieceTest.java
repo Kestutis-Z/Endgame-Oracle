@@ -27,4 +27,9 @@ public class PieceTest {
 	assertEquals(expectedAbbreviation, actualAbbreviation);
     }
 
+    @Test
+    public void testAllAbbreviationsOfPieces() {
+	
+    }
+    
 }

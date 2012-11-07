@@ -62,6 +62,13 @@ public class ChessPosition {
 	return new ChessPosition(tablebase, squares, sideToMove);
     }
     
+    public static ChessPosition createFromTextualDrawing(
+	    ChessPositionDiagram drawing, SideToMove sideToMove) {
+	//piecesWithSquares = 
+	
+	return new ChessPosition(null, sideToMove);
+    }
+    
     public BiMap<Piece, Square> getPiecesWithSquares() {
         return piecesWithSquares;
     }
