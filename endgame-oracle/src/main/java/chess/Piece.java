@@ -1,5 +1,9 @@
 package chess;
 
+import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.List;
+
 /**
  * Real, physical chess piece. A legal chess position
  * can contain exactly one King, up to 8 pawns, and up
@@ -65,4 +69,11 @@ public enum Piece {
 	return pieceAbbreviation;	
     }
     
+    public static List<String> allAbbreviationsOfPieces() {
+	List<String> allAbbreviations = new ArrayList<>();
+	for (Piece pc : EnumSet.allOf(Piece.class)) {
+	    allAbbreviations.add(pc.getPieceAbbreviation());	    
+	}
+	return allAbbreviations;
+    }
 }
