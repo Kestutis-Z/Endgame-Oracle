@@ -1,7 +1,12 @@
 package chess;
 
-/** An exception that occurs when the square is expected to 
- * contain some piece, but does not. */
+/** 
+ * An exception that occurs when the square is expected to 
+ * contain some piece, but does not. 
+ * 
+ * @author Kestutis
+ *
+ */
 public class SquareContainsNoPiecesException extends Exception {
 
     private static final long serialVersionUID = -5331133672234425506L;
