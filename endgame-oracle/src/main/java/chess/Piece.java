@@ -54,4 +54,15 @@ public enum Piece {
         return pieceColour;
     }
     
+    /** @return short form of this piece's name */
+    public String getPieceAbbreviation() {
+	String pieceAbbreviation = "";
+	pieceAbbreviation += this.pieceColour.getPieceColourAbbreviation();
+	pieceAbbreviation += this.pieceType.getPieceTypeAbbreviation();
+	char lastCharOfName = this.name().charAt(this.name().length() - 1);
+	if (Character.isDigit(lastCharOfName))
+	    pieceAbbreviation += lastCharOfName;
+	return pieceAbbreviation;	
+    }
+    
 }
