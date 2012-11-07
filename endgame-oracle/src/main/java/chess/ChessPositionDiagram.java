@@ -83,15 +83,20 @@ public class ChessPositionDiagram {
 	    throw new IncorrectChessDiagramDrawingException("Incorrect rank in middle third: was " +
 	    		"expected " + rank + " but obtained" + (middleThird.charAt(2) - '0'));
 	for (int file = 1; file <= 8; file++) {	   
-	    String pieceAbbreviation = Character.isDigit(middleThird.charAt(7 * (file - 1) + 8)) 
-		    ? middleThird.substring(7 * (file - 1) + 6, 7 * (file - 1) + 9) 
-			    : middleThird.substring(7 * (file - 1) + 6, 7 * (file - 1) + 8);
+	    String pieceAbbreviation = getDiagramSquareContent(middleThird, file);
 	    if (!(Piece.allAbbreviationsOfPieces().contains(pieceAbbreviation)
 		    || pieceAbbreviation.equals("  ")))		    
 		throw new IncorrectChessDiagramDrawingException("Incorrect piece " +
 				"abbreviation in file " + file + ", rank " + 
 				rank + ": " + pieceAbbreviation);		    		
 	}
+    }
+
+    private String getDiagramSquareContent(String middleThird, int file) {
+	String pieceAbbreviation = Character.isDigit(middleThird.charAt(7 * (file - 1) + 8)) 
+	    ? middleThird.substring(7 * (file - 1) + 6, 7 * (file - 1) + 9) 
+		    : middleThird.substring(7 * (file - 1) + 6, 7 * (file - 1) + 8);
+	return pieceAbbreviation;
     }
 
     private void verifyDiagramBottom(String lastLine) throws IncorrectChessDiagramDrawingException {
