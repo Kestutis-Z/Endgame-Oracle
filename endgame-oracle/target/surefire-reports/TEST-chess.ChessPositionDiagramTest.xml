@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite failures="0" time="0" errors="0" skipped="0" tests="8" name="tablebases.TablebaseTest">
+<testsuite failures="0" time="0.104" errors="0" skipped="0" tests="2" name="chess.ChessPositionDiagramTest">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.7.0\jre\bin"/>
@@ -61,12 +61,6 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase time="0" classname="tablebases.TablebaseTest" name="testGetBlackPieces"/>
-  <testcase time="0" classname="tablebases.TablebaseTest" name="testGetAllPieces"/>
-  <testcase time="0" classname="tablebases.TablebaseTest" name="testGetPiecesAsCharsFromTablebase"/>
-  <testcase time="0" classname="tablebases.TablebaseTest" name="testGetTablebasePositionCount"/>
-  <testcase time="0" classname="tablebases.TablebaseTest" name="testGetConsequtiveDuplicateCharsInArrayUpToIndex"/>
-  <testcase time="0" classname="tablebases.TablebaseTest" name="testGetWhitePieces"/>
-  <testcase time="0" classname="tablebases.TablebaseTest" name="testRemovingOnePieceFromTablebase"/>
-  <testcase time="0" classname="tablebases.TablebaseTest" name="testTablebaseToStringOutput"/>
+  <testcase time="0.04" classname="chess.ChessPositionDiagramTest" name="testGetChessPositionDiagram"/>
+  <testcase time="0" classname="chess.ChessPositionDiagramTest" name="testGetPiecesWithSquares"/>
 </testsuite>

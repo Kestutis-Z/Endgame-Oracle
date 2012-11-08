@@ -64,9 +64,8 @@ public class ChessPosition {
     
     public static ChessPosition createFromTextualDrawing(
 	    ChessPositionDiagram drawing, SideToMove sideToMove) {
-	//piecesWithSquares = 
-	
-	return new ChessPosition(null, sideToMove);
+	BiMap<Piece, Square> piecesWithSquares = drawing.getPiecesWithSquaresFromDiagram(); 
+	return new ChessPosition(piecesWithSquares, sideToMove);
     }
     
     public BiMap<Piece, Square> getPiecesWithSquares() {

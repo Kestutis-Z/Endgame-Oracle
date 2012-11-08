@@ -169,6 +169,58 @@ public class ChessPositionTest {
 	assertEquals(expectedBlackSquaresKBNKPPP, actualBlackSquaresKBNKPPP);
     }
     
-    
+    @Test
+    public void testCreateFromTextualDrawing() throws IncorrectChessDiagramDrawingException {
+	String drawing =  		
+		    "    _______________________________________________________   \n" +
+		    "   |      |      |      |      |      |      |      |      |  \n" + 
+		    "  8|      |      |      |      |      |      |      |      |  \n" + 
+		    "   |______|______|______|______|______|______|______|______|  \n" + 
+		    "   |      |      |      |      |      |      |      |      |  \n" + 
+		    "  7|      |      |      |      |      |      |      |      |  \n" + 
+		    "   |______|______|______|______|______|______|______|______|  \n" + 
+		    "   |      |      |      |      |      |      |      |      |  \n" + 
+		    "  6|      |      |      |      |      |      |  BP3 |      |  \n" + 
+		    "   |______|______|______|______|______|______|______|______|  \n" + 
+		    "   |      |      |      |      |      |      |      |      |  \n" + 
+		    "  5|      |      |      |      |  WB  |      |      |      |  \n" + 
+		    "   |______|______|______|______|______|______|______|______|  \n" + 
+		    "   |      |      |      |      |      |      |      |      |  \n" + 
+		    "  4|      |      |      |      |      |      |      |  BP  |  \n" + 
+		    "   |______|______|______|______|______|______|______|______|  \n" + 
+		    "   |      |      |      |      |      |      |      |      |  \n" + 
+		    "  3|  WK  |      |      |      |  WN  |      |      |  BP2 |  \n" + 
+		    "   |______|______|______|______|______|______|______|______|  \n" + 
+		    "   |      |      |      |      |      |      |      |      |  \n" + 
+		    "  2|      |      |      |      |      |      |  BK  |      |  \n" + 
+		    "   |______|______|______|______|______|______|______|______|  \n" + 
+		    "   |      |      |      |      |      |      |      |      |  \n" + 
+		    "  1|      |      |      |      |      |      |      |      |  \n" + 
+		    "   |______|______|______|______|______|______|______|______|  \n" + 
+		    "      a      b      c      d      e      f      g      h      \n" ;
+	
+	ChessPositionDiagram cpDiagram = 
+		ChessPositionDiagram.createFromTextDiagram(drawing);
+	ChessPosition chessPosition = ChessPosition
+		.createFromTextualDrawing(cpDiagram, SideToMove.BLACK);
+	
+	List<Piece> expectedWhitePieces = new ArrayList<>();
+	expectedWhitePieces.add(Piece.WHITE_KING);
+	expectedWhitePieces.add(Piece.WHITE_BISHOP);
+	expectedWhitePieces.add(Piece.WHITE_KNIGHT);
+	List<Piece> actualWhitePieces = chessPosition.getWhitePieces();
+	
+	assertEquals(expectedWhitePieces, actualWhitePieces);
+	
+	List<Square> expectedBlackSquares = new ArrayList<>();
+	expectedBlackSquares.add(Square.G2);
+	expectedBlackSquares.add(Square.H4);
+	expectedBlackSquares.add(Square.H3);
+	expectedBlackSquares.add(Square.G6);
+	List<Square> actualBlackSquares = chessPosition.getBlackSquares();
+	
+	assertEquals(expectedBlackSquares, actualBlackSquares);
+	
+    }
     
 }
