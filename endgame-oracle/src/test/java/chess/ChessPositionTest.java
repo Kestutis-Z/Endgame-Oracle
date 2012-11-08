@@ -219,8 +219,45 @@ public class ChessPositionTest {
 	expectedBlackSquares.add(Square.G6);
 	List<Square> actualBlackSquares = chessPosition.getBlackSquares();
 	
-	assertEquals(expectedBlackSquares, actualBlackSquares);
-	
+	assertEquals(expectedBlackSquares, actualBlackSquares);	
     }
     
+    @Test(expected = IncorrectChessDiagramDrawingException.class)
+    public void testCreateFromTextDiagramThrowsIncorrectChessDiagramDrawingException() 
+	    throws IncorrectChessDiagramDrawingException, InterruptedException {
+	String incorrectDrawingWithTheTopShiftedOnePositionToTheRight =  
+		
+		    "     _______________________________________________________   \n" +
+		    "   |      |      |      |      |      |      |      |      |  \n" + 
+		    "  8|      |      |      |      |      |      |      |      |  \n" + 
+		    "   |______|______|______|______|______|______|______|______|  \n" + 
+		    "   |      |      |      |      |      |      |      |      |  \n" + 
+		    "  7|      |      |      |      |      |      |      |      |  \n" + 
+		    "   |______|______|______|______|______|______|______|______|  \n" + 
+		    "   |      |      |      |      |      |      |      |      |  \n" + 
+		    "  6|      |      |      |      |      |      |  BP3 |      |  \n" + 
+		    "   |______|______|______|______|______|______|______|______|  \n" + 
+		    "   |      |      |      |      |      |      |      |      |  \n" + 
+		    "  5|      |      |      |      |  WB  |      |      |      |  \n" + 
+		    "   |______|______|______|______|______|______|______|______|  \n" + 
+		    "   |      |      |      |      |      |      |      |      |  \n" + 
+		    "  4|      |      |      |      |      |      |      |  BP  |  \n" + 
+		    "   |______|______|______|______|______|______|______|______|  \n" + 
+		    "   |      |      |      |      |      |      |      |      |  \n" + 
+		    "  3|  WK  |      |      |      |  WN  |      |      |  BP2 |  \n" + 
+		    "   |______|______|______|______|______|______|______|______|  \n" + 
+		    "   |      |      |      |      |      |      |      |      |  \n" + 
+		    "  2|      |      |      |      |      |      |  BK  |      |  \n" + 
+		    "   |______|______|______|______|______|______|______|______|  \n" + 
+		    "   |      |      |      |      |      |      |      |      |  \n" + 
+		    "  1|      |      |      |      |      |      |      |      |  \n" + 
+		    "   |______|______|______|______|______|______|______|______|  \n" + 
+		    "      a      b      c      d      e      f      g      h      \n" ;
+	
+	ChessPositionDiagram cpDiagram = 
+		ChessPositionDiagram.createFromTextDiagram(
+			incorrectDrawingWithTheTopShiftedOnePositionToTheRight);
+	
+	cpDiagram.wait();
+    }
 }
