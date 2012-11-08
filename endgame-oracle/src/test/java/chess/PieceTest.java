@@ -63,6 +63,21 @@ public class PieceTest {
 	List<String> actualList = Piece.allAbbreviationsOfPieces();
 	
 	assertEquals(expectedList, actualList);
+    }    
+    
+    @Test
+    public void testGetPieceFromAbbreviation() {
+	String abbr1 = "BR2";
+	Piece expectedPiece = Piece.BLACK_ROOK_2;
+	Piece actualPiece = Piece.getPieceFromAbbreviation(abbr1);
+	
+	assertEquals(expectedPiece, actualPiece);
+	
+	String abbr2 = "WQ";
+	expectedPiece = Piece.WHITE_QUEEN;
+	actualPiece = Piece.getPieceFromAbbreviation(abbr2);
+	
+	assertEquals(expectedPiece, actualPiece);
     }
     
 }

@@ -76,4 +76,16 @@ public enum Piece {
 	}
 	return allAbbreviations;
     }
+
+    public static Piece getPieceFromAbbreviation(String abbreviation) {
+	String pieceName = "";
+	pieceName += PieceColour.getPieceColourFromAbbreviation(abbreviation.charAt(0));
+	pieceName += "_";
+	pieceName += PieceType.getPieceTypeFromAbbreviation(abbreviation.charAt(1));
+	if (abbreviation.length() == 3) {
+	    pieceName += "_";
+	    pieceName += abbreviation.charAt(2);
+	}
+	return Piece.valueOf(pieceName);
+    }
 }

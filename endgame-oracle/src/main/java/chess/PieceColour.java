@@ -24,5 +24,16 @@ public enum PieceColour {
     public char getPieceColourAbbreviation() {
         return pieceTypeColourFirstLetter;
     }
+    
+    public static PieceColour getPieceColourFromAbbreviation(char abbreviation) {
+	switch(abbreviation) {
+	case 'W': 
+	    return WHITE;
+	case 'B': 
+	    return BLACK;	
+	default:
+	    throw new AssertionError("Not supported abbreviation: " + abbreviation);
+	}
+    }
 
 }
