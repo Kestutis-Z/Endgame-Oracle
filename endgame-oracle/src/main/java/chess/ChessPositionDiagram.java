@@ -1,5 +1,8 @@
 package chess;
 
+import com.google.common.collect.BiMap;
+import com.google.common.collect.EnumBiMap;
+
 /**
  * A "drawing" of a chess position on the screen. 
  * This is useful for better readability of ChessPosition tests.
@@ -17,7 +20,7 @@ public class ChessPositionDiagram {
      * "  8|      |      |      |      |      |      |      |      |  \n" + 
      * "   |______|______|______|______|______|______|______|______|  \n" + 
      * "   |      |      |      |      |      |      |      |      |  \n" + 
-     * "  7|      |      |      |      |      |      |      |      |  \n" + 
+     * "  7|      |      |      |      |  WK  |      |      |      |  \n" + 
      * "   |______|______|______|______|______|______|______|______|  \n" + 
      * "   |      |      |      |      |      |      |      |      |  \n" + 
      * "  6|      |      |      |      |      |      |      |      |  \n" + 
@@ -26,7 +29,7 @@ public class ChessPositionDiagram {
      * "  5|      |      |      |      |      |      |      |      |  \n" + 
      * "   |______|______|______|______|______|______|______|______|  \n" + 
      * "   |      |      |      |      |      |      |      |      |  \n" + 
-     * "  4|      |      |      |      |      |      |      |      |  \n" + 
+     * "  4|      |      |  BK  |      |      |      |      |      |  \n" + 
      * "   |______|______|______|______|______|______|______|______|  \n" + 
      * "   |      |      |      |      |      |      |      |      |  \n" + 
      * "  3|      |      |      |      |      |      |      |      |  \n" + 
@@ -38,6 +41,9 @@ public class ChessPositionDiagram {
      * "  1|      |      |      |      |      |      |      |      |  \n" + 
      * "   |______|______|______|______|______|______|______|______|  \n" + 
      * "      a      b      c      d      e      f      g      h      \n" ;
+     
+     The diagram above contains two pieces: White King on square e7, 
+     and Black King on square c4. 
      */
     private String diagram;
 
@@ -92,6 +98,10 @@ public class ChessPositionDiagram {
 	}
     }
 
+    /**
+     * @return abbreviation of Piece on the square, or "  " (two spaces) 
+     * if the square is empty
+     */
     private String getDiagramSquareContent(String middleThird, int file) {
 	String pieceAbbreviation = Character.isDigit(middleThird.charAt(7 * (file - 1) + 8)) 
 	    ? middleThird.substring(7 * (file - 1) + 6, 7 * (file - 1) + 9) 
@@ -115,6 +125,23 @@ public class ChessPositionDiagram {
 
     public void setDiagram(String diagram) {
         this.diagram = diagram;
+    }
+
+    public BiMap<Piece, Square> getPiecesWithSquaresFromDiagram() {
+	BiMap<Piece, Square> piecesWithSquares = EnumBiMap.create(Piece.class, Square.class);
+	String[] diagramLines = diagram.split("\n");
+	for (int rank = 8; rank >= 1; rank--) {
+	    String middleThird = diagramLines[3*(8 - rank) + 2];
+	    for (int file = 1; file <= 8; file++) {	   
+		String pieceAbbreviation = getDiagramSquareContent(middleThird, file);
+		if (!pieceAbbreviation.equals("  ")) {
+		    Piece piece = Piece.getPieceFromAbbreviation(pieceAbbreviation);
+		    Square square = Square.getSquareFromFileAndRank(file, rank);
+		    piecesWithSquares.put(piece, square);
+		}
+	    }		    
+	}
+	return piecesWithSquares;
     }    
 
 }

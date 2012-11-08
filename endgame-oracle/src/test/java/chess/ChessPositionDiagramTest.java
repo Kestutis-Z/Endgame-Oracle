@@ -39,7 +39,6 @@ public class ChessPositionDiagramTest {
 		    "   |______|______|______|______|______|______|______|______|  \n" + 
 		    "      a      b      c      d      e      f      g      h      \n" ;
 	
-	System.out.println(drawing);
 	ChessPositionDiagram chessPositionDiagram = 
 		ChessPositionDiagram.createFromTextDiagram(drawing);
 	
@@ -90,11 +89,9 @@ public class ChessPositionDiagramTest {
 	expectedPiecesWithSquaresKBNKPPP.put(Piece.BLACK_PAWN_2, Square.H3);
 	expectedPiecesWithSquaresKBNKPPP.put(Piece.BLACK_PAWN_3, Square.G6);
 	
-	BiMap<Piece, Square> actualPiecesWithSquaresKBNKPPP = cpDiagram.getPiecesWithSquares();
+	BiMap<Piece, Square> actualPiecesWithSquaresKBNKPPP = cpDiagram.getPiecesWithSquaresFromDiagram();
 	
 	assertEquals(expectedPiecesWithSquaresKBNKPPP, actualPiecesWithSquaresKBNKPPP);
-    }
-    
-    
+    }    
 
 }
