@@ -13,9 +13,9 @@ public class GaviotaTablebasesLibrary {
 
     static {
 	try {
-	    System.loadLibrary("GaviotaTablebasesLibrary");
+	    System.loadLibrary("GaviotaTablebasesProbingAPI");	    
 	} catch (Exception e) {
-	    System.out.println("GaviotaTablebasesLibrary could not be loaded.");
+	    System.out.println("GaviotaTablebasesProbingAPI could not be loaded.");
 	    e.printStackTrace();
 	}
     }

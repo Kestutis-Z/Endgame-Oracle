@@ -29,5 +29,6 @@ A program to experiment with chess endgame tablebases and machine learning algor
   		<version>1.9.5</version>
   		<scope>test</scope>
   	</dependency>
+  	
   </dependencies>
 </project>
