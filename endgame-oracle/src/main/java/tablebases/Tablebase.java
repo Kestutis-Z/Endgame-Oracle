@@ -81,7 +81,7 @@ public enum Tablebase {
     }
 
     protected static List<Piece> convertCharsToPieces(char[] piecesAsChars, PieceColour pieceColour) {
-	List<Piece> pieces = new ArrayList<>();
+	List<Piece> pieces = new ArrayList<Piece>();
 	String pieceCol = pieceColour.name();
 	
 	for (int i = 0; i < piecesAsChars.length; i++) {
@@ -123,7 +123,7 @@ public enum Tablebase {
     
     /** @return list of all (White followed by Black) pieces for this tablebase */
     public List<Piece> getAllPieces() {
-	List<Piece> allPieces = new ArrayList<>();
+	List<Piece> allPieces = new ArrayList<Piece>();
 	allPieces.addAll(getWhitePieces());
 	allPieces.addAll(getBlackPieces());
 	return allPieces;

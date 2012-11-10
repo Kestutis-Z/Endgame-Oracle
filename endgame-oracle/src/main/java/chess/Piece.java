@@ -70,7 +70,7 @@ public enum Piece {
     }
     
     public static List<String> allAbbreviationsOfPieces() {
-	List<String> allAbbreviations = new ArrayList<>();
+	List<String> allAbbreviations = new ArrayList<String>();
 	for (Piece pc : EnumSet.allOf(Piece.class)) {
 	    allAbbreviations.add(pc.getPieceAbbreviation());	    
 	}

@@ -14,7 +14,6 @@ import chess.ChessPositionEvaluation.ChessPositionEvaluationWithDTM;
  */
 public class GaviotaTablebasesProbingCodeAPI implements EndgameTablebasesProbingCodeAPI {      
     
-    @Override
     public ChessPositionEvaluation queryTablebaseForResultOnly(
 	    ChessPosition chessPosition) {
 	GaviotaTablebasesQueryTemplate<ChessPositionEvaluation> query = 
@@ -23,7 +22,6 @@ public class GaviotaTablebasesProbingCodeAPI implements EndgameTablebasesProbing
 
     }
       
-    @Override
     public ChessPositionEvaluationWithDTM queryTablebaseForResultAndDTM(
 	    ChessPosition chessPosition) {
 	GaviotaTablebasesQueryTemplate<ChessPositionEvaluationWithDTM> query = 

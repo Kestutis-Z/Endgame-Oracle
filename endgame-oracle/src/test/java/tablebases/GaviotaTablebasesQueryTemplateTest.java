@@ -14,7 +14,7 @@ import chess.Square;
 
 public class GaviotaTablebasesQueryTemplateTest {
 
-    private List<Square> squares = new ArrayList<>();
+    private List<Square> squares = new ArrayList<Square>();
     
     @Before
     public void setUp() throws Exception {

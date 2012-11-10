@@ -152,7 +152,7 @@ public class SquareTest {
     
     @Test 
     public void testRangeOfSquaresEndsWithPiece() {	
-	List<Square> expectedRange = new ArrayList<>();
+	List<Square> expectedRange = new ArrayList<Square>();
 	expectedRange.add(Square.B1);
 	expectedRange.add(Square.C1);
 	expectedRange.add(Square.D1);
@@ -164,7 +164,7 @@ public class SquareTest {
     
     @Test 
     public void testRangeOfSquaresEndsChessboardEdge() {	
-	List<Square> expectedRange = new ArrayList<>();
+	List<Square> expectedRange = new ArrayList<Square>();
 	expectedRange.add(Square.F2);
 	expectedRange.add(Square.G1);
 	
@@ -176,7 +176,7 @@ public class SquareTest {
     
     @Test 
     public void testRangeOfSquaresIsEmpty() {	
-	List<Square> expectedRange = new ArrayList<>();
+	List<Square> expectedRange = new ArrayList<Square>();
 	
 	List<Square> actualRange = squareH8.rangeOfSquares(chessPosition1, Direction.NORTHWEST);
 	actualRange.addAll(squareH8.rangeOfSquares(chessPosition1, Direction.NORTH));

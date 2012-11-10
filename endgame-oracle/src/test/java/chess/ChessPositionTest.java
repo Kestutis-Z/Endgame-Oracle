@@ -21,7 +21,7 @@ public class ChessPositionTest {
     public void setUp() throws Exception {
 	mockedChessPosition = mock(ChessPosition.class);
 	
-	List<Square> squaresKRPKR = new ArrayList<>();
+	List<Square> squaresKRPKR = new ArrayList<Square>();
 	squaresKRPKR.add(Square.E5);
 	squaresKRPKR.add(Square.E3);
 	squaresKRPKR.add(Square.D5);
@@ -55,7 +55,7 @@ public class ChessPositionTest {
     
     @Test(expected = IllegalArgumentException.class)
     public void testGetSquaresToPiecesMapThrowsIllegalArgumentException() {
-	List<Square> squares2 = new ArrayList<>();
+	List<Square> squares2 = new ArrayList<Square>();
 	squares2.add(Square.E5);
 	squares2.add(Square.E5);
 	squares2.add(Square.D5);
@@ -71,7 +71,7 @@ public class ChessPositionTest {
     
     @Test(expected = IllegalArgumentException.class)
     public void testGetPiecesToSquaresThrowsIllegalArgumentException() {
-	List<Square> squares3 = new ArrayList<>();
+	List<Square> squares3 = new ArrayList<Square>();
 	squares3.add(Square.E3);
 	squares3.add(Square.D5);
 	squares3.add(Square.H8);
@@ -87,7 +87,7 @@ public class ChessPositionTest {
     
     @Test
     public void testGetWhitePieces() {
-	List<Piece> expectedWhitePiecesKRPKR = new ArrayList<>();
+	List<Piece> expectedWhitePiecesKRPKR = new ArrayList<Piece>();
 	expectedWhitePiecesKRPKR.add(Piece.WHITE_KING);
 	expectedWhitePiecesKRPKR.add(Piece.WHITE_ROOK);
 	expectedWhitePiecesKRPKR.add(Piece.WHITE_PAWN);
@@ -96,7 +96,7 @@ public class ChessPositionTest {
 	
 	assertEquals(expectedWhitePiecesKRPKR, actualWhitePiecesKRPKR);
 	
-	List<Piece> expectedWhitePiecesKBNKPPP = new ArrayList<>();
+	List<Piece> expectedWhitePiecesKBNKPPP = new ArrayList<Piece>();
 	expectedWhitePiecesKBNKPPP.add(Piece.WHITE_KING);
 	expectedWhitePiecesKBNKPPP.add(Piece.WHITE_BISHOP);
 	expectedWhitePiecesKBNKPPP.add(Piece.WHITE_KNIGHT);
@@ -108,7 +108,7 @@ public class ChessPositionTest {
     
     @Test
     public void testGetBlackPieces() {
-	List<Piece> expectedBlackPiecesKRPKR = new ArrayList<>();
+	List<Piece> expectedBlackPiecesKRPKR = new ArrayList<Piece>();
 	expectedBlackPiecesKRPKR.add(Piece.BLACK_KING);
 	expectedBlackPiecesKRPKR.add(Piece.BLACK_ROOK);
 	
@@ -116,7 +116,7 @@ public class ChessPositionTest {
 	
 	assertEquals(expectedBlackPiecesKRPKR, actualBlackPiecesKRPKR);
 	
-	List<Piece> expectedBlackPiecesKBNKPPP = new ArrayList<>();
+	List<Piece> expectedBlackPiecesKBNKPPP = new ArrayList<Piece>();
 	expectedBlackPiecesKBNKPPP.add(Piece.BLACK_KING);
 	expectedBlackPiecesKBNKPPP.add(Piece.BLACK_PAWN);
 	expectedBlackPiecesKBNKPPP.add(Piece.BLACK_PAWN_2);
@@ -129,7 +129,7 @@ public class ChessPositionTest {
     
     @Test
     public void testGetWhiteSquares() {
-	List<Square> expectedWhiteSquaresKRPKR = new ArrayList<>();
+	List<Square> expectedWhiteSquaresKRPKR = new ArrayList<Square>();
 	expectedWhiteSquaresKRPKR.add(Square.E5);
 	expectedWhiteSquaresKRPKR.add(Square.E3);
 	expectedWhiteSquaresKRPKR.add(Square.D5);
@@ -138,7 +138,7 @@ public class ChessPositionTest {
 	
 	assertEquals(expectedWhiteSquaresKRPKR, actualWhiteSquaresKRPKR);
 	
-	List<Square> expectedWhiteSquaresKBNKPPP = new ArrayList<>();
+	List<Square> expectedWhiteSquaresKBNKPPP = new ArrayList<Square>();
 	expectedWhiteSquaresKBNKPPP.add(Square.A3);
 	expectedWhiteSquaresKBNKPPP.add(Square.E5);
 	expectedWhiteSquaresKBNKPPP.add(Square.E3);
@@ -150,7 +150,7 @@ public class ChessPositionTest {
     
     @Test
     public void testGetBlackSquares() {
-	List<Square> expectedBlackSquaresKRPKR = new ArrayList<>();
+	List<Square> expectedBlackSquaresKRPKR = new ArrayList<Square>();
 	expectedBlackSquaresKRPKR.add(Square.H8);
 	expectedBlackSquaresKRPKR.add(Square.D1);
 	
@@ -158,7 +158,7 @@ public class ChessPositionTest {
 	
 	assertEquals(expectedBlackSquaresKRPKR, actualBlackSquaresKRPKR);
 	
-	List<Square> expectedBlackSquaresKBNKPPP = new ArrayList<>();
+	List<Square> expectedBlackSquaresKBNKPPP = new ArrayList<Square>();
 	expectedBlackSquaresKBNKPPP.add(Square.G2);
 	expectedBlackSquaresKBNKPPP.add(Square.H4);
 	expectedBlackSquaresKBNKPPP.add(Square.H3);
@@ -204,7 +204,7 @@ public class ChessPositionTest {
 	ChessPosition chessPosition = ChessPosition
 		.createFromTextualDrawing(cpDiagram, SideToMove.BLACK);
 	
-	List<Piece> expectedWhitePieces = new ArrayList<>();
+	List<Piece> expectedWhitePieces = new ArrayList<Piece>();
 	expectedWhitePieces.add(Piece.WHITE_KING);
 	expectedWhitePieces.add(Piece.WHITE_BISHOP);
 	expectedWhitePieces.add(Piece.WHITE_KNIGHT);
@@ -212,7 +212,7 @@ public class ChessPositionTest {
 	
 	assertEquals(expectedWhitePieces, actualWhitePieces);
 	
-	List<Square> expectedBlackSquares = new ArrayList<>();
+	List<Square> expectedBlackSquares = new ArrayList<Square>();
 	expectedBlackSquares.add(Square.G2);
 	expectedBlackSquares.add(Square.H4);
 	expectedBlackSquares.add(Square.H3);

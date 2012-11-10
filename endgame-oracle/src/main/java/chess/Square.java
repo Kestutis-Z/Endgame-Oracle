@@ -136,7 +136,7 @@ public enum Square {
      * applicable to long-range pieces. */
     public List<Square> rangeOfSquares(ChessPosition 
 	    chessPosition, Direction direction) {
-	List<Square> squares = new ArrayList<>();
+	List<Square> squares = new ArrayList<Square>();
 	Square nextSq = this;
 	while (nextSq.hasAdjacentSquareTo(direction)) {
 	    nextSq = nextSq.getAdjacentSquare(direction);
@@ -202,7 +202,7 @@ public enum Square {
 	if (begin.getSquareID() > end.getSquareID())
 	    return getRectangleZone(end, begin); 
 	/* Now rank of begin <= than rank of end */
-	Set<Square> squareZone = new HashSet<>();
+	Set<Square> squareZone = new HashSet<Square>();
 	int beginFile = begin.getFile();
 	int beginRank = begin.getRank();
 	int endFile = end.getFile();

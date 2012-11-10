@@ -48,7 +48,7 @@ public class ChessPosition {
     
     /** Checks if there are no duplicate squares in the list. */
     private static boolean allSquaresAreDifferent(List<Square> squareList) {
-   	Set<Square> squareSet = new HashSet<>(squareList);
+   	Set<Square> squareSet = new HashSet<Square>(squareList);
    	return squareList.size() == squareSet.size();       
     }
     
@@ -85,7 +85,7 @@ public class ChessPosition {
     }
 
     public List<Piece> getWhitePieces() {
-	List<Piece> whitePieces = new ArrayList<>();
+	List<Piece> whitePieces = new ArrayList<Piece>();
 	for (Piece p : piecesWithSquares.keySet()) {
 	    if (p == Piece.BLACK_KING)
 		break;	    
@@ -95,7 +95,7 @@ public class ChessPosition {
     }
 
     public List<Piece> getBlackPieces() {
-	List<Piece> blackPieces = new ArrayList<>();
+	List<Piece> blackPieces = new ArrayList<Piece>();
 	for (Piece p : piecesWithSquares.keySet()) {
 	    if (p.getPieceColour() == PieceColour.BLACK)
 		blackPieces.add(p);
@@ -104,7 +104,7 @@ public class ChessPosition {
     }
 
     public List<Square> getWhiteSquares() {
-	List<Square> whiteSquares = new ArrayList<>();
+	List<Square> whiteSquares = new ArrayList<Square>();
 	for (Piece p : getWhitePieces()) {
 	    whiteSquares.add(piecesWithSquares.get(p));
 	}
@@ -112,7 +112,7 @@ public class ChessPosition {
     }
 
     public List<Square> getBlackSquares() {
-	List<Square> blackSquares = new ArrayList<>();
+	List<Square> blackSquares = new ArrayList<Square>();
 	for (Piece p : getBlackPieces()) {
 	    blackSquares.add(piecesWithSquares.get(p));
 	}

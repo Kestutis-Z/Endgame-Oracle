@@ -32,7 +32,7 @@ public class PieceTest {
 
     @Test
     public void testAllAbbreviationsOfPieces() {
-	List<String> expectedList = new ArrayList<>();
+	List<String> expectedList = new ArrayList<String>();
 	
 	expectedList.add("WK");
 	expectedList.add("WQ");
