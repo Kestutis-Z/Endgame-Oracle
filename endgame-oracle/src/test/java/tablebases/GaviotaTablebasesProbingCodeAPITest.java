@@ -54,39 +54,7 @@ public class GaviotaTablebasesProbingCodeAPITest {
 	squaresKRK.add(Square.A8);
 	chessPositionKRK = ChessPosition.createFromTablebase(
 		Tablebase.KRK, squaresKRK, SideToMove.WHITE);
-	/*
-	String drawingKPK =  
-		
-		    "    _______________________________________________________   \n" +
-		    "   |      |      |      |      |      |      |      |      |  \n" + 
-		    "  8|  BK  |      |      |      |      |      |      |      |  \n" + 
-		    "   |______|______|______|______|______|______|______|______|  \n" + 
-		    "   |      |      |      |      |      |      |      |      |  \n" + 
-		    "  7|      |      |      |      |  WP  |      |      |      |  \n" + 
-		    "   |______|______|______|______|______|______|______|______|  \n" + 
-		    "   |      |      |      |      |      |      |      |      |  \n" + 
-		    "  6|  WK  |      |      |      |      |      |      |      |  \n" + 
-		    "   |______|______|______|______|______|______|______|______|  \n" + 
-		    "   |      |      |      |      |      |      |      |      |  \n" + 
-		    "  5|      |      |      |      |      |      |      |      |  \n" + 
-		    "   |______|______|______|______|______|______|______|______|  \n" + 
-		    "   |      |      |      |      |      |      |      |      |  \n" + 
-		    "  4|      |      |      |      |      |      |      |      |  \n" + 
-		    "   |______|______|______|______|______|______|______|______|  \n" + 
-		    "   |      |      |      |      |      |      |      |      |  \n" + 
-		    "  3|      |      |      |      |      |      |      |      |  \n" + 
-		    "   |______|______|______|______|______|______|______|______|  \n" + 
-		    "   |      |      |      |      |      |      |      |      |  \n" + 
-		    "  2|      |      |      |      |      |      |      |      |  \n" + 
-		    "   |______|______|______|______|______|______|______|______|  \n" + 
-		    "   |      |      |      |      |      |      |      |      |  \n" + 
-		    "  1|      |      |      |      |      |      |      |      |  \n" + 
-		    "   |______|______|______|______|______|______|______|______|  \n" + 
-		    "      a      b      c      d      e      f      g      h      \n" ;
 	
-	ChessPositionDiagram diagram = ChessPositionDiagram.createFromTextDiagram(drawingKPK);
-	chessPositionIllegal = ChessPosition.createFromTextualDrawing(diagram, SideToMove.BLACK);	
-	*/
 	endtablebases = new GaviotaTablebasesProbingCodeAPI();
     }
     
@@ -98,11 +66,7 @@ public class GaviotaTablebasesProbingCodeAPITest {
     
     @Test
     public void queryGaviotaTablebasesForResultOnlyTest() {
-	/*
-	ChessPositionEvaluation expectedResult1 = ChessPositionEvaluation.ILLEGAL;
-	ChessPositionEvaluation actualResult1 = endtablebases.queryTablebaseForResultOnly(chessPositionIllegal);	
-	assertEquals(expectedResult1, actualResult1);
-	*/
+	
 	ChessPositionEvaluation expectedResult2 = ChessPositionEvaluation.DRAW;
 	ChessPositionEvaluation actualResult2 = endtablebases.queryTablebaseForResultOnly(chessPositionKK);	
 	assertEquals(expectedResult2, actualResult2);
@@ -167,25 +131,117 @@ public class GaviotaTablebasesProbingCodeAPITest {
 	int expectedDtm6 = 16;
 	int actualDtm6 = endtablebases.queryTablebaseForResultAndDTM(cp6).getDistanceToMate();
 	assertEquals(expectedDtm6, actualDtm6);
-    }
+    }    
     
-    
-    /*
     @Test
-    public void testQueryTablebaseForResultOnly() {
-	ChessPositionEvaluation expectedResult1 = ChessPositionEvaluation.ILLEGAL;
-	ChessPositionEvaluation actualResult1 = endtablebases.queryTablebaseForResultOnly(chessPositionIllegal);	
-	assertEquals(expectedResult1, actualResult1);
+    public void testQueryTablebaseUsingChessDiagrams() throws IncorrectChessDiagramDrawingException {
+	
+	String drawingKPK =  
+		
+		    "    _______________________________________________________   \n" +
+		    "   |      |      |      |      |      |      |      |      |  \n" + 
+		    "  8|  BK  |      |      |      |      |      |      |      |  \n" + 
+		    "   |______|______|______|______|______|______|______|______|  \n" + 
+		    "   |      |      |      |      |      |      |      |      |  \n" + 
+		    "  7|      |      |      |      |  WP  |      |      |      |  \n" + 
+		    "   |______|______|______|______|______|______|______|______|  \n" + 
+		    "   |      |      |      |      |      |      |      |      |  \n" + 
+		    "  6|  WK  |      |      |      |      |      |      |      |  \n" + 
+		    "   |______|______|______|______|______|______|______|______|  \n" + 
+		    "   |      |      |      |      |      |      |      |      |  \n" + 
+		    "  5|      |      |      |      |      |      |      |      |  \n" + 
+		    "   |______|______|______|______|______|______|______|______|  \n" + 
+		    "   |      |      |      |      |      |      |      |      |  \n" + 
+		    "  4|      |      |      |      |      |      |      |      |  \n" + 
+		    "   |______|______|______|______|______|______|______|______|  \n" + 
+		    "   |      |      |      |      |      |      |      |      |  \n" + 
+		    "  3|      |      |      |      |      |      |      |      |  \n" + 
+		    "   |______|______|______|______|______|______|______|______|  \n" + 
+		    "   |      |      |      |      |      |      |      |      |  \n" + 
+		    "  2|      |      |      |      |      |      |      |      |  \n" + 
+		    "   |______|______|______|______|______|______|______|______|  \n" + 
+		    "   |      |      |      |      |      |      |      |      |  \n" + 
+		    "  1|      |      |      |      |      |      |      |      |  \n" + 
+		    "   |______|______|______|______|______|______|______|______|  \n" + 
+		    "      a      b      c      d      e      f      g      h      \n" ;
+	
+	ChessPositionDiagram diagram = ChessPositionDiagram.createFromTextDiagram(drawingKPK);
+	ChessPosition chessPosition = ChessPosition.createFromTextualDrawing(diagram, SideToMove.BLACK);	
+	int expectedDtm = 2;
+	int actualDtm = endtablebases.queryTablebaseForResultAndDTM(chessPosition).getDistanceToMate();
+	assertEquals(expectedDtm, actualDtm);
+	
+	drawingKPK =  
+		
+		    "    _______________________________________________________   \n" +
+		    "   |      |      |      |      |      |      |      |      |  \n" + 
+		    "  8|      |      |      |      |      |      |      |      |  \n" + 
+		    "   |______|______|______|______|______|______|______|______|  \n" + 
+		    "   |      |      |      |      |      |      |      |      |  \n" + 
+		    "  7|      |      |      |      |  WP  |      |      |      |  \n" + 
+		    "   |______|______|______|______|______|______|______|______|  \n" + 
+		    "   |      |      |      |      |      |      |      |      |  \n" + 
+		    "  6|  WK  |      |      |      |      |      |      |      |  \n" + 
+		    "   |______|______|______|______|______|______|______|______|  \n" + 
+		    "   |      |      |      |      |      |      |      |      |  \n" + 
+		    "  5|      |      |      |      |      |      |      |      |  \n" + 
+		    "   |______|______|______|______|______|______|______|______|  \n" + 
+		    "   |      |      |      |      |      |      |      |      |  \n" + 
+		    "  4|      |      |      |      |      |      |      |      |  \n" + 
+		    "   |______|______|______|______|______|______|______|______|  \n" + 
+		    "   |      |      |      |      |      |      |      |      |  \n" + 
+		    "  3|      |      |      |      |      |      |      |      |  \n" + 
+		    "   |______|______|______|______|______|______|______|______|  \n" + 
+		    "   |      |      |      |      |      |      |      |      |  \n" + 
+		    "  2|      |      |      |      |      |      |      |      |  \n" + 
+		    "   |______|______|______|______|______|______|______|______|  \n" + 
+		    "   |      |      |      |      |      |      |      |      |  \n" + 
+		    "  1|      |      |      |      |      |      |      |      |  \n" + 
+		    "   |______|______|______|______|______|______|______|______|  \n" + 
+		    "      a      b      c      d      e      f      g      h      \n" ;
+	
+	diagram = ChessPositionDiagram.createFromTextDiagram(drawingKPK);
+	chessPosition = ChessPosition.createFromTextualDrawing(diagram, SideToMove.BLACK);	
+	expectedDtm = 0;
+	actualDtm = endtablebases.queryTablebaseForResultAndDTM(chessPosition).getDistanceToMate();
+	assertEquals(expectedDtm, actualDtm);
+	
+	drawingKPK =  
+		
+		    "    _______________________________________________________   \n" +
+		    "   |      |      |      |      |      |      |      |      |  \n" + 
+		    "  8|      |      |      |      |      |      |      |      |  \n" + 
+		    "   |______|______|______|______|______|______|______|______|  \n" + 
+		    "   |      |      |      |      |      |      |      |      |  \n" + 
+		    "  7|      |      |      |      |      |      |      |      |  \n" + 
+		    "   |______|______|______|______|______|______|______|______|  \n" + 
+		    "   |      |      |      |      |      |      |      |      |  \n" + 
+		    "  6|      |      |      |      |      |      |      |      |  \n" + 
+		    "   |______|______|______|______|______|______|______|______|  \n" + 
+		    "   |      |      |      |      |      |      |      |      |  \n" + 
+		    "  5|      |      |      |      |      |      |  WK  |      |  \n" + 
+		    "   |______|______|______|______|______|______|______|______|  \n" + 
+		    "   |      |      |      |      |      |      |      |      |  \n" + 
+		    "  4|      |      |  BK  |      |      |      |      |      |  \n" + 
+		    "   |______|______|______|______|______|______|______|______|  \n" + 
+		    "   |      |      |      |      |      |      |      |      |  \n" + 
+		    "  3|      |      |      |      |      |      |      |      |  \n" + 
+		    "   |______|______|______|______|______|______|______|______|  \n" + 
+		    "   |      |      |      |      |      |      |      |      |  \n" + 
+		    "  2|      |      |      |      |      |  WR  |      |      |  \n" + 
+		    "   |______|______|______|______|______|______|______|______|  \n" + 
+		    "   |      |      |      |      |      |      |      |      |  \n" + 
+		    "  1|      |      |      |      |      |      |      |      |  \n" + 
+		    "   |______|______|______|______|______|______|______|______|  \n" + 
+		    "      a      b      c      d      e      f      g      h      \n" ;
+	
+	diagram = ChessPositionDiagram.createFromTextDiagram(drawingKPK);
+	chessPosition = ChessPosition.createFromTextualDrawing(diagram, SideToMove.WHITE);	
+	expectedDtm = 13;
+	actualDtm = endtablebases.queryTablebaseForResultAndDTM(chessPosition).getDistanceToMate();
+	assertEquals(expectedDtm, actualDtm);
     }
 
-    @Test
-    public void testQueryTablebaseForResultAndDTM() {
-	System.out.println("GaviotaTablebasesProbingAPI could not be loaded.");
-    }
-    */
-    
-    
-    
 }
 
 
