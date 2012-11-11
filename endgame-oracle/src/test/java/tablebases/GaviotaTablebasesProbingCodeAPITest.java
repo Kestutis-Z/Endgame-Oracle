@@ -20,21 +20,22 @@ import chess.Square;
 
 public class GaviotaTablebasesProbingCodeAPITest {
 
-    //private static final String GTB_PATH = System.getProperty("user.dir") + "/Gaviota Tablebases";
-    private static final String GTB_PATH = "C:/Users/Kestutis/Gaviota Tablebases";
+    private static final String MAVEN_GTB_PATH = 
+	    System.getProperty("user.dir") + "/src/main/resources/Gaviota Tablebases";
+    
     private GaviotaTablebasesLibrary mockedGTB;
     private ChessPosition chessPositionIllegal, chessPositionKK, chessPositionKRK;
     private EndgameTablebasesProbingCodeAPI endtablebases;
 
     @BeforeClass
     public static void intGTB() {
-	GaviotaTablebasesLibrary.initializeGaviotaTablebases(GTB_PATH);
+	GaviotaTablebasesLibrary.initializeGaviotaTablebases(MAVEN_GTB_PATH);
     }
     
     @Before
     public void set() throws IncorrectChessDiagramDrawingException {
 	mockedGTB = mock(GaviotaTablebasesLibrary.class);
-    
+  
 	List<Square> squaresIL = new ArrayList<Square>();
 	squaresIL.add(Square.A7);
 	squaresIL.add(Square.E7);
