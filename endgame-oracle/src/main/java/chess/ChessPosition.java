@@ -1,6 +1,7 @@
 package chess;
 
 import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -18,6 +19,24 @@ import tablebases.Tablebase;
  *
  */
 public class ChessPosition {
+    
+    public static EnumSet<Square> whiteKingSquares = EnumSet.range(Square.A1, Square.D1); 
+    static {
+	whiteKingSquares.addAll(EnumSet.range(Square.A2, Square.D2));
+	whiteKingSquares.addAll(EnumSet.range(Square.A3, Square.D3));
+	whiteKingSquares.addAll(EnumSet.range(Square.A4, Square.D4));	
+	whiteKingSquares.addAll(EnumSet.range(Square.A5, Square.D5));
+	whiteKingSquares.addAll(EnumSet.range(Square.A6, Square.D6));
+	whiteKingSquares.addAll(EnumSet.range(Square.A7, Square.D7));
+	whiteKingSquares.addAll(EnumSet.range(Square.A8, Square.D8)); 
+    }
+    private static final List<Square> whiteKingSquaresList = new ArrayList<Square>(whiteKingSquares);
+    public static final List<Square> pawnSquaresList = new ArrayList<Square>(EnumSet.range(Square.A7, Square.H2));
+    public static final List<Square> allSquaresList = new ArrayList<Square>(EnumSet.allOf(Square.class)); 
+    private static final int whiteKingSquaresCount = whiteKingSquares.size();
+    private static final int pawnSquaresCount = pawnSquaresList.size();
+    private static final int allSquaresCount = allSquaresList.size();
+    
     private BiMap<Piece, Square> piecesWithSquares;
     private SideToMove sideToMove;
     
@@ -62,6 +81,40 @@ public class ChessPosition {
 	return new ChessPosition(tablebase, squares, sideToMove);
     }
     
+    public static ChessPosition createRandomFromTablebase(
+	    Tablebase tablebase, SideToMove sideToMove) {
+	BiMap<Piece, Square> piecesWithSquares = generateRandomSquaresForPieces(tablebase);
+	return new ChessPosition(piecesWithSquares, sideToMove);	
+    }
+    
+    private static BiMap<Piece, Square> generateRandomSquaresForPieces(
+	    Tablebase tablebase) {
+	BiMap<Piece, Square> piecesWithSquares = 
+		EnumBiMap.create(Piece.class, Square.class);
+	List<Piece> pieces = tablebase.getAllPieces();
+
+	MersenneTwisterFast numberGenerator = new MersenneTwisterFast();
+
+	Square randSquare = null;
+	for (Piece piece : pieces) {
+	    do {
+		if (piece == Piece.WHITE_KING) {
+		    int wkRand = numberGenerator.nextInt(whiteKingSquaresCount);
+		    randSquare = whiteKingSquaresList.get(wkRand);
+		} else if (piece.getPieceType() == PieceType.PAWN) {
+		    int pRand = numberGenerator.nextInt(pawnSquaresCount);
+		    randSquare = pawnSquaresList.get(pRand);
+		} else {
+		    int allRand = numberGenerator.nextInt(allSquaresCount);
+		    randSquare = allSquaresList.get(allRand);
+		}
+	    } while (piecesWithSquares.containsValue(randSquare));
+
+	    piecesWithSquares.put(piece, randSquare);
+	}
+	return piecesWithSquares;
+    }
+
     public static ChessPosition createFromTextualDrawing(
 	    ChessPositionDiagram drawing, SideToMove sideToMove) {
 	BiMap<Piece, Square> piecesWithSquares = drawing.getPiecesWithSquaresFromDiagram(); 

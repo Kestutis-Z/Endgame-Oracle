@@ -260,4 +260,7 @@ public class ChessPositionTest {
 	
 	cpDiagram.wait();
     }
+    
+    
+    
 }

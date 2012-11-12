@@ -243,6 +243,42 @@ public class GaviotaTablebasesProbingCodeAPITest {
 	assertEquals(expectedDtm, actualDtm);
     }
 
+    @Test
+    public void testEvaluateRandomChessPosition() {
+	ChessPosition randomChessPosition;
+	ChessPositionEvaluation actualResult;
+	
+	int countIllegals = 0, countDraws = 0, countWhiteWins = 0, countBlackWins = 0;
+	for (int i = 0; i < 1000; i++) {
+	    randomChessPosition = ChessPosition.createRandomFromTablebase(
+			Tablebase.KPK, SideToMove.WHITE);
+	    actualResult = endtablebases.queryTablebaseForResultOnly(randomChessPosition);
+	   
+	    switch(actualResult) {
+	    case ILLEGAL:
+		countIllegals++;
+		break;
+	    case DRAW:
+		countDraws++;
+		break;
+	    case WHITE_WINS:
+		countWhiteWins++;
+		break;
+	    case BLACK_WINS:
+		countBlackWins++;
+		break;
+	    default:
+		throw new AssertionError("Unsupported evaluation: " + actualResult);
+	    }	    
+	}
+	
+	assertTrue(countIllegals > 0);
+	assertTrue(countDraws > 0);
+	assertTrue(countWhiteWins > 0);
+	assertTrue(countBlackWins == 0);
+	
+    }
+    
 }
 
 
