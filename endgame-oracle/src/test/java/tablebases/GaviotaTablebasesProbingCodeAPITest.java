@@ -23,7 +23,7 @@ public class GaviotaTablebasesProbingCodeAPITest {
     private static final String MAVEN_GTB_PATH = 
 	    System.getProperty("user.dir") + "/src/main/resources/Gaviota Tablebases";
     
-    private GaviotaTablebasesLibrary mockedGTB;
+    private GaviotaTablebasesLibrary mockedGTBLibrary;
     private ChessPosition chessPositionIllegal, chessPositionKK, chessPositionKRK;
     private EndgameTablebasesProbingCodeAPI endtablebases;
 
@@ -34,7 +34,7 @@ public class GaviotaTablebasesProbingCodeAPITest {
     
     @Before
     public void set() throws IncorrectChessDiagramDrawingException {
-	mockedGTB = mock(GaviotaTablebasesLibrary.class);
+	mockedGTBLibrary = mock(GaviotaTablebasesLibrary.class);
   
 	List<Square> squaresIL = new ArrayList<Square>();
 	squaresIL.add(Square.A7);
@@ -58,6 +58,14 @@ public class GaviotaTablebasesProbingCodeAPITest {
 	
 	endtablebases = new GaviotaTablebasesProbingCodeAPI();
     }
+    
+    @SuppressWarnings("static-access")
+    @Test(expected = RuntimeException.class)
+    public void testInitializeGTBMethodMock() {	
+	doThrow(new RuntimeException()).when(mockedGTBLibrary)
+		.initializeGaviotaTablebases(MAVEN_GTB_PATH);
+	verify(mockedGTBLibrary);
+    } 
     
     @Test
     public void testQueryGaviotaTablebasesForResultOnly() {
