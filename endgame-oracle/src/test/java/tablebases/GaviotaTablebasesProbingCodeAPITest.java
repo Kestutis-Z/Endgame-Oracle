@@ -59,14 +59,8 @@ public class GaviotaTablebasesProbingCodeAPITest {
 	endtablebases = new GaviotaTablebasesProbingCodeAPI();
     }
     
-    @Test(expected = RuntimeException.class)
-    public void initializeGTBMethodMockTest() {	
-	doThrow(new RuntimeException()).when(mockedGTB);
-	verify(mockedGTB);
-    } 
-    
     @Test
-    public void queryGaviotaTablebasesForResultOnlyTest() {
+    public void testQueryGaviotaTablebasesForResultOnly() {
 	
 	ChessPositionEvaluation expectedResult2 = ChessPositionEvaluation.DRAW;
 	ChessPositionEvaluation actualResult2 = endtablebases.queryTablebaseForResultOnly(chessPositionKK);	
@@ -78,7 +72,7 @@ public class GaviotaTablebasesProbingCodeAPITest {
     }
     
     @Test
-    public void queryGaviotaTablebasesForResultAndDtmTest() {
+    public void testQueryGaviotaTablebasesForResultAndDtm() {
 	ChessPositionEvaluation expectedResult1 = ChessPositionEvaluation.ILLEGAL;
 	ChessPositionEvaluation actualResult1 = endtablebases.queryTablebaseForResultOnly(chessPositionIllegal);	
 	assertEquals(expectedResult1, actualResult1);
