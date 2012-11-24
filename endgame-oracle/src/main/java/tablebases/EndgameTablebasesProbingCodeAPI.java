@@ -31,8 +31,9 @@ public interface EndgameTablebasesProbingCodeAPI {
      *
      * @param chessPosition representation of the chess position: side to move
      * (White / Black), White and Black pieces, and their respective squares
-     * @return evaluation and distance to mate (a non-negative 
-     * number in case the evaluation is "White wins" / "Black wins")
+     * @return game-theoretical value of the chess position obtained from the 
+     * tablebases, and distance to mate (a non-negative number in case 
+     * the evaluation is "White wins" / "Black wins", zero otherwise)
      */
     public abstract ChessPositionEvaluationWithDTM 
     	queryTablebaseForResultAndDTM(ChessPosition chessPosition);    
