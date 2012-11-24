@@ -159,7 +159,7 @@ public class ChessPosition {
      *
      * @param tablebase computerized database containing all possible legal chess
      * positions and their evaluations, given the set of specific chess pieces
-     * @param squares the squares
+     * @param squares the squares to be assigned to the pieces in the tablebase
      * @param sideToMove side whose turn is to make a move - White or Black
      * @return representation of the chess position: side to move (White / Black),
      * White and Black pieces, and their respective squares
