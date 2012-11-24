@@ -251,7 +251,7 @@ public class GaviotaTablebasesProbingCodeAPITest {
 	ChessPositionEvaluation actualResult;
 	
 	int countIllegals = 0, countDraws = 0, countWhiteWins = 0, countBlackWins = 0;
-	for (int i = 0; i < 1000; i++) {
+	for (int i = 0; i < 10000; i++) {
 	    randomChessPosition = ChessPosition.createRandomFromTablebase(
 			Tablebase.KPK, SideToMove.WHITE);
 	    actualResult = endtablebases.queryTablebaseForResultOnly(randomChessPosition);
