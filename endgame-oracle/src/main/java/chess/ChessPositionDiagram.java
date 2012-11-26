@@ -4,11 +4,11 @@ import com.google.common.collect.BiMap;
 import com.google.common.collect.EnumBiMap;
 
 /**
- * A "drawing" of the chess position on the screen. 
- * This is useful for better readability of ChessPosition tests.
+ * A "drawing" of the chess position on the screen. This is useful for the 
+ * better readability of the tests involvin the ChessPosition objects.
  * 
  * @author Kestutis
- *
+ * 
  */
 public class ChessPositionDiagram {
     
@@ -48,18 +48,19 @@ public class ChessPositionDiagram {
      It should be noted, that the diagram must be of exactly this form, to be accepted.     
      */
    
-    /** 
-     * The diagram of the concrete chess position. 
-     * This diagram must satisft certain requirements to be valid. 
+    /**
+     * The diagram of the concrete chess position. This diagram must satisfy
+     * certain requirements to be valid.
      */
     private String diagram;
     
     /**
      * Instantiates a new chess position diagram.
-     *
-     * @param diagram the diagram showing a chess position
-     * @throws IncorrectChessDiagramDrawingException if 
-     * something is wrong with the provided diagram.
+     * 
+     * @param diagram
+     *            the diagram showing a chess position
+     * @throws IncorrectChessDiagramDrawingException
+     *            if something is wrong with the provided diagram.
      */
     private ChessPositionDiagram(String diagram) 
 	    throws IncorrectChessDiagramDrawingException {
@@ -69,10 +70,11 @@ public class ChessPositionDiagram {
     
     /**
      * Verifies the validity of the diagram.
-     *
-     * @param diagram the diagram showing a chess position
-     * @throws IncorrectChessDiagramDrawingException if 
-     * something is wrong with the provided diagram.
+     * 
+     * @param diagram
+     *            the diagram showing a chess position
+     * @throws IncorrectChessDiagramDrawingException
+     *            if something is wrong with the provided diagram.
      */
     private void verifyDiagram(String diagram) 
 	    throws IncorrectChessDiagramDrawingException {
@@ -86,11 +88,13 @@ public class ChessPositionDiagram {
     }
 
     /**
-     * Verifies if the diagram's top (the very first line) has been drawn correctly.
-     *
-     * @param firstLine the top line of the diagram
-     * @throws IncorrectChessDiagramDrawingException if 
-     * the first line is not what was expected
+     * Verifies if the diagram's top (the very first line) has been drawn
+     * correctly.
+     * 
+     * @param firstLine
+     *            the top line of the diagram
+     * @throws IncorrectChessDiagramDrawingException
+     *            if the first line is not what was expected
      */
     private void verifyDiagramTop(String firstLine) 
 	    throws IncorrectChessDiagramDrawingException {
@@ -99,12 +103,13 @@ public class ChessPositionDiagram {
     }
 
     /**
-     * Verifies if the diagram's body (all the lines except the top and the 
+     * Verifies if the diagram's body (all the lines except the top and the
      * bottom ones) have been drawn correctly.
-     *
-     * @param diagramLines the array of the diagram lines
-     * @throws IncorrectChessDiagramDrawingException if 
-     * the body of the diagram is not what was expected
+     * 
+     * @param diagramLines
+     *            the array of the diagram lines
+     * @throws IncorrectChessDiagramDrawingException
+     *            if the body of the diagram is not what was expected
      */
     private void verifyDiagramBody(String[] diagramLines) throws IncorrectChessDiagramDrawingException {
 	for (int rank = 8; rank >= 1; rank--) {
@@ -123,13 +128,16 @@ public class ChessPositionDiagram {
     }
 
     /**
-     * Verifies the middle third of the three-line String in the diagram, 
+     * Verifies the middle third of the three-line String in the diagram,
      * representing one of the ranks 1, 2, ..., 8.
-     *
-     * @param rank integer from 1 to 8, representing a chessboard rank (horizontal line)
-     * @param middleThird the second (middle) line of the three lines showing a rank
-     * @throws IncorrectChessDiagramDrawingException if 
-     * the middle third is not what was expected
+     * 
+     * @param rank
+     *            integer from 1 to 8, representing a chessboard rank
+     *            (horizontal line)
+     * @param middleThird
+     *            the second (middle) line of the three lines representing a rank
+     * @throws IncorrectChessDiagramDrawingException
+     *            if the middle third is not what was expected
      */
     private void verifyMiddleThird(int rank, String middleThird) 
 	    throws IncorrectChessDiagramDrawingException {
@@ -147,13 +155,17 @@ public class ChessPositionDiagram {
     }
 
     /**
-     * Gets the diagram square content (what, if any, piece occupies that square).
-     *
-     * @param middleThird the middle third of the three-liner String, representing 
-     * one of the eight ranks of the chessboard
-     * @param file one of the files a to h, expressed as an integer 1 to 8
-     * @return the diagram square content - abbreviation of the piece occupying 
-     * that square, or, if the square is empty, the String "  " (two spaces)
+     * Gets the diagram square content (what, if any, piece occupies that
+     * square).
+     * 
+     * @param middleThird
+     *            the middle third of the three-liner String, representing one
+     *            of the eight ranks of the chessboard
+     * @param file
+     *            one of the files a to h, expressed as an integer 1 to 8
+     * @return the diagram square content - abbreviation of the piece occupying
+     *         that square, or, if the square is empty, the String "  " (two
+     *         spaces)
      */
     private String getDiagramSquareContent(String middleThird, int file) {
 	String pieceAbbreviation = Character.isDigit(middleThird.charAt(7 * (file - 1) + 8)) 
@@ -163,11 +175,13 @@ public class ChessPositionDiagram {
     }
 
     /**
-     * Verifies if the diagram's bottom (the very last line) has been drawn correctly.
-     *
-     * @param lastLine the bottom (26th) line of the diagram
-     * @throws IncorrectChessDiagramDrawingException if 
-     * the bottom line is not what was expected
+     * Verifies if the diagram's bottom (the very last line) has been drawn
+     * correctly.
+     * 
+     * @param lastLine
+     *            the bottom (26th) line of the diagram
+     * @throws IncorrectChessDiagramDrawingException
+     *            if the bottom line is not what was expected
      */
     private void verifyDiagramBottom(String lastLine) throws IncorrectChessDiagramDrawingException {
 	if (!lastLine.equals("      a      b      c      d      e      f      g      h      "))
@@ -176,11 +190,13 @@ public class ChessPositionDiagram {
 
     /**
      * Creates the new chess position diagram using the text diagram.
-     *
-     * @param diagram the diagram with the concrete chess position. 
-     * @return the chess position diagram object, that can be used to instantiate chess positions
-     * @throws IncorrectChessDiagramDrawingException if 
-     * the provided diagram is not valid
+     * 
+     * @param diagram
+     *            the diagram with the concrete chess position.
+     * @return the chess position diagram object, that can be used to
+     *         instantiate chess positions
+     * @throws IncorrectChessDiagramDrawingException
+     *            if the provided diagram is not valid
      */
     public static ChessPositionDiagram createFromTextDiagram(String diagram) 
 	    throws IncorrectChessDiagramDrawingException {
@@ -189,7 +205,7 @@ public class ChessPositionDiagram {
 
     /**
      * Gets the text diagram, used to instantiate this object.
-     *
+     * 
      * @return the diagram - text "drawing" of the chess position on the chessboard
      */
     public String getDiagram() {
@@ -198,18 +214,19 @@ public class ChessPositionDiagram {
 
     /**
      * Sets the diagram with the new chess position.
-     *
-     * @param diagram the diagram with the concrete chess position. 
+     * 
+     * @param diagram
+     *            the diagram with the concrete chess position.
      */
     public void setDiagram(String diagram) {
         this.diagram = diagram;
     }
 
     /**
-     * Gets the bidirectional map: Piece <-> Square, directly from the diagram.  
-     *
-     * @return the bidirectional map from the pieces present in this chess 
-     * position, to the squares they occupy
+     * Gets the bidirectional map: Piece <-> Square, directly from the diagram.
+     * 
+     * @return the bidirectional map from the pieces present in this chess
+     *         position, to the squares they occupy
      */
     public BiMap<Piece, Square> getPiecesWithSquaresFromDiagram() {
 	BiMap<Piece, Square> piecesWithSquares = EnumBiMap.create(Piece.class, Square.class);

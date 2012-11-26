@@ -4,10 +4,11 @@ import chess.ChessPositionEvaluation;
 import chess.ChessPositionEvaluation.ChessPositionEvaluationWithDTM;
 
 /**
- * Container for native methods to initialize and probe the Gaviota tablebases.
+ * Container for the native methods used to initialize and probe the Gaviota
+ * tablebases.
  * 
  * @author Kestutis
- *
+ * 
  */
 public class GaviotaTablebasesLibrary {
 
@@ -32,7 +33,7 @@ public class GaviotaTablebasesLibrary {
 
     /**
      * Queries the Gaviota tablebases for the game-theoretical result
-     * ("White wins" / "Black wins" / "Draw") only.
+     * ("White wins" / "Black wins" / "Draw" / "Illegal position") only.
      * 
      * @param sideToMove
      *            - integer corresponding to one of the TB_return_values in the
@@ -55,7 +56,8 @@ public class GaviotaTablebasesLibrary {
      * @param blackPieces
      *            - byte array corresponding to the array of TB_pieces in the
      *            the Gaviota Tablebases API
-     * @return game-theoretical result
+     * @return the game-theoretical value of the chess position obtained from
+     *         the tablebases
      */
     public static native ChessPositionEvaluation queryGaviotaTablebasesForResultOnly(
 	    int sideToMove, int enpassantSquare, int castlingOption,
@@ -64,7 +66,8 @@ public class GaviotaTablebasesLibrary {
 
     /**
      * Queries the Gaviota tablebases for the game-theoretical result
-     * ("White wins" / "Black wins" / "Draw") and distance-to-mate information.
+     * ("White wins" / "Black wins" / "Draw" / "Illegal position"), and the
+     * distance-to-mate information.
      * 
      * @param sideToMove
      *            - integer corresponding to one of the TB_return_values in the
@@ -87,7 +90,10 @@ public class GaviotaTablebasesLibrary {
      * @param blackPieces
      *            - byte array corresponding to the array of TB_pieces in the
      *            the Gaviota Tablebases API
-     * @return game-theoretical result and distance-to-mate in moves.
+     * @return the game-theoretical value of the chess position obtained from
+     *         the tablebases, and the distance to mate (a non-negative number
+     *         in case the evaluation is "White wins" / "Black wins", zero
+     *         otherwise)
      */
     public static native ChessPositionEvaluationWithDTM queryGaviotaTablebasesForResultAndDistanceToMate(
 	    int sideToMove, int enpassantSquare, int castlingOption,

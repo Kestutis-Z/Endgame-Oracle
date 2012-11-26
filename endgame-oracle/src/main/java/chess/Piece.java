@@ -5,12 +5,17 @@ import java.util.EnumSet;
 import java.util.List;
 
 /**
- * Real, physical chess piece. A legal chess position
- * can contain exactly one King, up to 8 pawns, and up
- * to 9 units of each other piece for each piece colour.
+ * Representation of the chess piece. A legal chess position can contain exactly
+ * one King, up to 8 pawns, and up to 9 units of each other piece for each piece
+ * colour. </br> </br> If there is more than one piece of the same type and
+ * colour in the chess position (e.g., two Black pawns), then the pieces are
+ * ordered according to the values of the squares they occupy (from square a1 to
+ * square h8). The second, third, etc., duplicated pieces are assigned numbers
+ * two, three, and so on, and are recognized as
+ * "PieceColour_PieceType_PieceNumber", e.g., "BLACK_PAWN_2".
  * 
  * @author Kestutis
- *
+ * 
  */
 public enum Piece {
 
@@ -38,30 +43,56 @@ public enum Piece {
     BLACK_KNIGHT_2(PieceType.KNIGHT, PieceColour.BLACK),
     BLACK_PAWN(PieceType.PAWN, PieceColour.BLACK),
     BLACK_PAWN_2(PieceType.PAWN, PieceColour.BLACK),
-    BLACK_PAWN_3(PieceType.PAWN, PieceColour.BLACK);
+    BLACK_PAWN_3(PieceType.PAWN, PieceColour.BLACK);    
     
+    /** Abstract chess piece type ("King", "Queen", etc.). */
     private final PieceType pieceType;
-    private final PieceColour pieceColour;   
-
+    
+    /** Chess piece colour - either White, or Black. */
+    private final PieceColour pieceColour;  
+    
+    /**
+     * Instantiates a new piece.
+     * 
+     * @param pieceType
+     *            abstract chess piece type ("King", "Queen", etc.)
+     * @param pieceColour
+     *            chess piece colour - either White, or Black
+     */
     private Piece(PieceType pieceType, PieceColour pieceColour) {
 	this.pieceType = pieceType;
 	this.pieceColour = pieceColour;
     }
     
-    /** @return chess piece type */
+    /**
+     * Gets the abstract type of this piece.
+     * 
+     * @return the abstract chess piece type ("King", "Queen", etc.)
+     */
     public PieceType getPieceType() {
         return pieceType;
     }
     
-    /** @return chess piece colour */
+    /**
+     * Gets the colour of this piece.
+     * 
+     * @return the chess piece colour - either White, or Black
+     */
     public PieceColour getPieceColour() {
         return pieceColour;
     }
     
-    /** @return short form of this piece's name */
+    /**
+     * Gets the abbreviation (short form) of this piece e.g., "WB2" for the
+     * piece "WHITE_BISHOP_2". The abbreviation can be used as a buiding part of
+     * the chess pattern names, in textual chess diagrams, and other situations
+     * were the full piece name would be too long.
+     * 
+     * @return the short form of this piece's name
+     */
     public String getPieceAbbreviation() {
 	String pieceAbbreviation = "";
-	pieceAbbreviation += this.pieceColour.getPieceColourAbbreviation();
+	pieceAbbreviation += this.pieceColour.getPieceColourFirstLetter();
 	pieceAbbreviation += this.pieceType.getPieceTypeAbbreviation();
 	char lastCharOfName = this.name().charAt(this.name().length() - 1);
 	if (Character.isDigit(lastCharOfName))
@@ -69,6 +100,11 @@ public enum Piece {
 	return pieceAbbreviation;	
     }
     
+    /**
+     * Gets the abbreviations of all the pieces in this enumeration.
+     * 
+     * @return the list of the short forms of all the enumerated pieces
+     */
     public static List<String> allAbbreviationsOfPieces() {
 	List<String> allAbbreviations = new ArrayList<String>();
 	for (Piece pc : EnumSet.allOf(Piece.class)) {
@@ -77,6 +113,15 @@ public enum Piece {
 	return allAbbreviations;
     }
 
+    /**
+     * Gets the piece as a Piece object from the abbreviation. Assumes the
+     * argument is valid, i.e., this enumeration contains a piece corresponding
+     * to the provided abbreviation.
+     * 
+     * @param abbreviation
+     *            the short form of the piece's name
+     * @return the representation of the chess piece
+     */
     public static Piece getPieceFromAbbreviation(String abbreviation) {
 	String pieceName = "";
 	pieceName += PieceColour.getPieceColourFromAbbreviation(abbreviation.charAt(0));
@@ -88,4 +133,5 @@ public enum Piece {
 	}
 	return Piece.valueOf(pieceName);
     }
+    
 }

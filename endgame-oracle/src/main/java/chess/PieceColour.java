@@ -1,30 +1,46 @@
 package chess;
 
 /**
- * Chess piece colour - each piece can be of 
- * one of the two listed colours.
- *  
+ * Chess piece colour - either White, or Black.
+ * 
  * @author Kestutis
- *
+ * 
  */
 public enum PieceColour {
     
-    WHITE('W'), BLACK('B');
+    WHITE('W'), BLACK('B');    
     
-    private final char pieceTypeColourFirstLetter;
-
-    private PieceColour(char pieceColourAbbreviation) {
-	this.pieceTypeColourFirstLetter = pieceColourAbbreviation;
-    }
-
+    /** The first letter of this piece colour - either 'W', or 'B'. */
+    private final char pieceColourFirstLetter;
+   
     /**
-     * @return first upper-case letter of the piece colour 
-     * ('W' or 'B' for standard White and Black colours)
+     * Instantiates a new piece colour.
+     * 
+     * @param pieceColourFirstLetter
+     *            the first letter of this piece colour - either 'W', or 'B'
      */
-    public char getPieceColourAbbreviation() {
-        return pieceTypeColourFirstLetter;
+    private PieceColour(char pieceColourFirstLetter) {
+	this.pieceColourFirstLetter = pieceColourFirstLetter;
     }
     
+    /**
+     * Gets the first upper-case letter of this piece colour ('W' or 'B' for the
+     * standard White and Black colours).
+     * 
+     * @return the first letter of this piece colour - either 'W', or 'B'
+     */
+    public char getPieceColourFirstLetter() {
+        return pieceColourFirstLetter;
+    }    
+    
+    /**
+     * Gets the piece colour from the abbreviation (capital letter 'W' or 'B').
+     * 
+     * @param abbreviation
+     *            the first upper-case letter of the piece colour ('W' or 'B'
+     *            for the standard White and Black colours)
+     * @return the chess piece colour - either White, or Black
+     */
     public static PieceColour getPieceColourFromAbbreviation(char abbreviation) {
 	switch(abbreviation) {
 	case 'W': 

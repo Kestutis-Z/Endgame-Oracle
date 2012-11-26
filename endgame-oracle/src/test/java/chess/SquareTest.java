@@ -39,7 +39,7 @@ public class SquareTest {
 	map1.put(Piece.BLACK_KING, Square.H8);
 	map1.put(Piece.BLACK_ROOK, Square.D1);
 	chessPosition1 = ChessPosition
-		.createFromPiecesToSquaresMap(map1, SideToMove.WHITE); 
+		.createNewChessPositionFromPiecesToSquaresBiMap(map1, SideToMove.WHITE); 
     }
 
     @Test

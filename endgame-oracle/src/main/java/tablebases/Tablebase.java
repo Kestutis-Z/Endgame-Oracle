@@ -8,11 +8,11 @@ import chess.PieceColour;
 import chess.PieceType;
 
 /**
- * Computerized database containing all possible legal chess positions 
- * and their evaluations, given the set of specific chess pieces. 
+ * Computerized database containing all possible legal chess positions and their
+ * evaluations, given the set of specific chess pieces.
  * 
  * @author Kestutis
- *
+ * 
  */
 public enum Tablebase {
     
@@ -24,54 +24,91 @@ public enum Tablebase {
     KRPK(7877172, 10249464),
     KRPKR(476609388, 490095548) 
     
-    // TODO all the remaining tablebases
+    // TODO all the remaining tablebases    
     
     ;
-
-    private final long totalWhiteToMovePositions; 
+    
+    /** The number of white-to-move positions in this tablebase. */
+    private final long totalWhiteToMovePositions;
+    /** The number of black-to-move positions in this tablebase. */
     private final long totalBlackToMovePositions;
     
+    /**
+     * Instantiates a new tablebase.
+     * 
+     * @param wCount
+     *            the number of white-to-move positions in this tablebase
+     * @param bCount
+     *            the number of black-to-move positions in this tablebase
+     */
     private Tablebase(long wCount, long bCount) {
 	totalWhiteToMovePositions = wCount;
 	totalBlackToMovePositions = bCount;
     }
-
-    /** @return number of white-to-move positions in tablebase */
+    
+    /**
+     * Gets the total of white-to-move positions in this tablebase.
+     * 
+     * @return the number of white-to-move positions in the tablebase
+     */
     public long getWhiteToMovePositionCount() {
 	return totalWhiteToMovePositions;
     }
 
-    /** @return number of black-to-move positions in tablebase */
+    /**
+     * Gets the total of black-to-move positions in this tablebase.
+     * 
+     * @return the number of black-to-move positions in the tablebase
+     */
     public long getBlackToMovePositionCount() {
 	return totalBlackToMovePositions;
     }     
 
-    /** @return list of White pieces for this tablebase */
+    /**
+     * Gets all the White pieces that are present in the chess positions
+     * contained in this tablebase.
+     * 
+     * @return the list of White pieces for this tablebase
+     */
     public List<Piece> getWhitePieces() {
 	char[] whitePiecesAsChars = getPiecesAsCharsFromTablebase(PieceColour.WHITE);
 	List<Piece> whitePieces = new ArrayList<Piece>();
 	whitePieces = convertCharsToPieces(whitePiecesAsChars, PieceColour.WHITE);
 	return whitePieces;
-    }
+    }    
     
     /**
-     * Tablebases' names consist of lists of upper-case letters, 
-     * corresponding to the abbreviations of abstract pieces. White pieces 
-     * are listed first, and followed by the black pieces; also, for 
-     * both sides, pieces are listed from the relatively most valuable 
-     * piece (King), to the least valuable - Pawn. Thus this method splits 
-     * the tablebase's name into two substrings, and returns the one that 
-     * corresponds to the specified piece colour.
+     * Gets the pieces as characters from this tablebase. <br/> <br/>
      * 
-     * @param pieceColour White/Black
-     * @return array of chars, each char representing a piece 
-     * type. E.g., 'K' for King, 'Q' for Queen, etc.
+     * Tablebases' names consist of lists of upper-case letters, corresponding
+     * to the abbreviations of abstract pieces. The White pieces are listed
+     * first, and followed by the Black pieces; also, for both sides, pieces are
+     * listed from the relatively most valuable piece - King, to the least
+     * valuable - Pawn. Thus this method splits the tablebase's name into two
+     * substrings, and returns the one that corresponds to the specified piece
+     * colour. 
+     * 
+     * @param pieceColour
+     *            the chess piece colour - either White, or Black
+     * @return the array of chars, each char representing a piece type. E.g.,
+     *         'K' for King, 'Q' for Queen, etc.
      */
     protected char[] getPiecesAsCharsFromTablebase(PieceColour pieceColour) {
 	String tablebaseName = this.name();
 	return extractCharsFromTablebaseName(pieceColour, tablebaseName);
     }
 
+    /**
+     * Extracts characters from this tablebase's name, representing the pieces
+     * of the specified colour.
+     * 
+     * @param pieceColour
+     *            the chess piece colour - either White, or Black
+     * @param tablebaseName
+     *            the tablebase's name as a String object
+     * @return the array of chars, each char representing a piece type. E.g.,
+     *         'K' for King, 'Q' for Queen, etc.
+     */
     private char[] extractCharsFromTablebaseName(PieceColour pieceColour,
 	    String tablebaseName) {
 	int blackKingsIndex = tablebaseName.lastIndexOf("K");
@@ -80,6 +117,16 @@ public enum Tablebase {
 		: tablebaseName.substring(blackKingsIndex).toCharArray();
     }
 
+    /**
+     * Converts characters, representing the pieces, to pieces of the specified
+     * colour.
+     * 
+     * @param piecesAsChars
+     *            the character array, representing the pieces
+     * @param pieceColour
+     *            the chess piece colour - either White, or Black
+     * @return the list of pieces corresponding to the provided characters
+     */
     protected static List<Piece> convertCharsToPieces(char[] piecesAsChars, PieceColour pieceColour) {
 	List<Piece> pieces = new ArrayList<Piece>();
 	String pieceCol = pieceColour.name();
@@ -102,18 +149,34 @@ public enum Tablebase {
 	return pieces;
     }
 
+    /**
+     * Gets the consequtive duplicate characters in the character array,
+     * starting at the specified index, and going backwards.
+     * 
+     * @param chars
+     *            the character array
+     * @param index
+     *            the index in the array
+     * @return the number of the consequtive duplicate characters in the array
+     *         up to (and including) the specified index
+     */
     protected static int getConsequtiveDuplicateCharsInArrayUpToIndex(
-	    char[] piecesAsChars, int i) {
-	if (i == 0)
+	    char[] chars, int index) {
+	if (index == 0)
 	    return 1;
 	int count = 1;
-	for (int j = i-1; piecesAsChars[i] == piecesAsChars[j] && j >= 0; j--) {
+	for (int j = index-1; chars[index] == chars[j] && j >= 0; j--) {
 	    count++;
 	}
 	return count;
     }
     
-    /** @return list of Black pieces for this tablebase */
+    /**
+     * Gets all the Black pieces that are present in the chess positions
+     * contained in this tablebase.
+     * 
+     * @return the list of Black pieces for this tablebase
+     */
     public List<Piece> getBlackPieces() {
 	char[] blackPiecesAsChars = getPiecesAsCharsFromTablebase(PieceColour.BLACK);
 	List<Piece> blackPieces = new ArrayList<Piece>();
@@ -121,7 +184,12 @@ public enum Tablebase {
 	return blackPieces;    
     }
     
-    /** @return list of all (White followed by Black) pieces for this tablebase */
+    /**
+     * Gets all the pieces (White followed by Black) that are present in the
+     * chess positions contained in this tablebase.
+     * 
+     * @return the list of all the pieces for this tablebase
+     */
     public List<Piece> getAllPieces() {
 	List<Piece> allPieces = new ArrayList<Piece>();
 	allPieces.addAll(getWhitePieces());
@@ -129,9 +197,15 @@ public enum Tablebase {
 	return allPieces;
     }
     
-    /** 
-     * @return tablebase that would be obtained by removing the 
-     * specified piece from this tablebase 
+    /**
+     * Removes the specified piece from this tablebase. This results in the new
+     * tablebase, with the same pieces as the original tablebase, except the
+     * removed piece.
+     * 
+     * @param piece
+     *            the representation of the chess piece
+     * @return the tablebase obtained by removing the specified piece from this
+     *         tablebase
      */
     public Tablebase removePiece(Piece piece) {
 	if (piece.getPieceType() == PieceType.KING)
@@ -160,19 +234,38 @@ public enum Tablebase {
 	return valueOf(newTB);
     }
 
-    private String deleteCharAt(String s, int index) {
-	StringBuffer buf = new StringBuffer(s.length() - 1);
-	buf.append(s.substring(0, index)).append(s.substring(index + 1));
+    /**
+     * Deletes the character from the String at the specified position.
+     * 
+     * @param originalString
+     *            the specified String
+     * @param index
+     *            the position in the originalString (the first character in the
+     *            originalString is at position zero)
+     * @return the new String object, obtained by removing one character from
+     *         the originalString
+     */
+    private String deleteCharAt(String originalString, int index) {
+	StringBuffer buf = new StringBuffer(originalString.length() - 1);
+	buf.append(originalString.substring(0, index)).append(originalString.substring(index + 1));
 	return buf.toString();
     }
     
     /**
-     * By convention, White pieces are relatively more 
-     * valuable in tablebases. For example, there is no 
-     * tablebase KPKQ ("White King + White Pawn vs. 
-     * Black King + Black Queen"), since the Queen is relatively more 
-     * valuable than the Pawn - instead the KQKP tablebase 
-     * is used and chessboard symmetry exploited. 
+     * Determines if the White pieces are relatively more valuable than the
+     * Black pieces in the provided String, that represents the (potential)
+     * tablebase name. <br/> <br/>
+     * 
+     * By convention, White pieces are relatively more valuable in tablebases.
+     * For example, there is no tablebase KPKQ ("White King + White Pawn vs.
+     * Black King + Black Queen"), since the Queen is relatively more valuable
+     * than the Pawn - instead the KQKP tablebase is used and the chessboard
+     * symmetry is exploited.
+     * 
+     * @param tablebaseName
+     *            the name of the potential tablebase
+     * @return true, if the White pieces <b>are</b> relatively more valuable
+     *         than the Black ones
      */
     private boolean whitePiecesAreRelativelyMoreValuableThanBlackPiecesIn(
 	    String tablebaseName) {
@@ -202,6 +295,16 @@ public enum Tablebase {
 	return whitePiecesCount >= blackPiecesCount ? true : false;
     }
     
+    /**
+     * Reverses the substrings representing the White and Black pieces in the
+     * specified String.
+     * 
+     * @param tablebaseName
+     *            the String representing the tablebase name
+     * @return the new String, obtained by switching the characters representing
+     *         the White pieces, and the characters representing the Black
+     *         pieces
+     */
     private String reverseWhiteAndBlackPieces(String tablebaseName) {
 	char[] whitePiecesAsChars = extractCharsFromTablebaseName(
 		PieceColour.WHITE, tablebaseName);	
@@ -210,6 +313,9 @@ public enum Tablebase {
 	return new String(blackPiecesAsChars) + new String (whitePiecesAsChars);
     }
     
+    /* (non-Javadoc)
+     * @see java.lang.Enum#toString()
+     */
     @Override
     public String toString() {
 	List<Piece> whitePieces = getWhitePieces();
