@@ -7,12 +7,14 @@ import java.util.List;
 /**
  * Representation of the chess piece. A legal chess position can contain exactly
  * one King, up to 8 pawns, and up to 9 units of each other piece for each piece
- * colour. </br> </br> If there is more than one piece of the same type and
- * colour in the chess position (e.g., two Black pawns), then the pieces are
- * ordered according to the values of the squares they occupy (from square a1 to
- * square h8). The second, third, etc., duplicated pieces are assigned numbers
- * two, three, and so on, and are recognized as
- * "PieceColour_PieceType_PieceNumber", e.g., "BLACK_PAWN_2".
+ * colour. </br> </br>
+ * 
+ * If there is more than one piece of the same type and colour in the chess
+ * position (e.g., two Black pawns), then the pieces are ordered according to
+ * the values of the squares they occupy (from square a1 to square h8). The
+ * second, third, etc., duplicated pieces are assigned numbers two, three, and
+ * so on, and are recognized as "PieceColour_PieceType_PieceNumber", e.g.,
+ * "BLACK_PAWN_2".
  * 
  * @author Kestutis
  * 
