@@ -5,7 +5,7 @@ import com.google.common.collect.EnumBiMap;
 
 /**
  * A "drawing" of the chess position on the screen. This is useful for the 
- * better readability of the tests involvin the ChessPosition objects.
+ * better readability of the tests involving the ChessPosition objects.
  * 
  * @author Kestutis
  * 
