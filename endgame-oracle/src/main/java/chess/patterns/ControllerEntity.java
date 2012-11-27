@@ -6,7 +6,7 @@ import chess.ChessPosition;
 import chess.Square;
 
 /**
- * Chess entity that is able to control some other (controllable) chess entity .
+ * Chess entity that is able to control some other (controllable) chess entity.
  * Here "controling" means attacking all the squares that are in some way
  * related to the controllable entity, and that are of importance in chess play. 
  * <br/> <br/>
