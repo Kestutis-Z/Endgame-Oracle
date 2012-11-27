@@ -3,7 +3,7 @@ package tablebases;
 import chess.SideToMove;
 
 /**
- * The positions in tablebase with the specified side-to-move only.
+ * The positions in the tablebase with the specified side-to-move only.
  * 
  * @author Kestutis
  * 
