@@ -1,4 +1,4 @@
-package tablebases;
+package tablebases.gaviotaTablebases;
 
 import java.util.List;
 
@@ -168,7 +168,7 @@ public abstract class GaviotaTablebasesQueryTemplate<T> {
      *            probe
      * @return the array of integers corresponding to the provided squares
      */
-    protected static int[] convertSquaresToGaviotaTablebasesInts(
+    public static int[] convertSquaresToGaviotaTablebasesInts(
 	    List<Square> squares) {
 	int[] squaresForGTB = new int[MAX_PIECES];
 	int len = squares.size();
@@ -190,7 +190,7 @@ public abstract class GaviotaTablebasesQueryTemplate<T> {
      *            probe
      * @return the byte array corresponding to the provided pieces
      */
-    protected static byte[] convertPiecesToGaviotaTablebasesInts(
+    public static byte[] convertPiecesToGaviotaTablebasesInts(
 	    List<Piece> pieces) {
 	byte[] piecesForGTB = new byte[MAX_PIECES];
 	int len = pieces.size();

@@ -8,6 +8,8 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import tablebases.gaviotaTablebases.GaviotaTablebasesQueryTemplate;
+
 import chess.ChessPosition;
 import chess.SideToMove;
 import chess.Square;

@@ -9,6 +9,9 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import tablebases.gaviotaTablebases.GaviotaTablebasesLibrary;
+import tablebases.gaviotaTablebases.GaviotaTablebasesProbingCodeAPI;
+
 import static org.mockito.Mockito.*;
 
 import chess.ChessPosition;
@@ -21,7 +24,8 @@ import chess.Square;
 public class GaviotaTablebasesProbingCodeAPITest {
 
     private static final String MAVEN_GTB_PATH = 
-	    System.getProperty("user.dir") + "/src/main/resources/Gaviota Tablebases";
+	    "C:/Users/Kestutis/CONST_GAVIOTA/gtb/downloads/ALL";
+	   // System.getProperty("user.dir") + "/src/main/resources/Gaviota Tablebases";
     
     private GaviotaTablebasesLibrary mockedGTBLibrary;
     private ChessPosition chessPositionIllegal, chessPositionKK, chessPositionKRK;

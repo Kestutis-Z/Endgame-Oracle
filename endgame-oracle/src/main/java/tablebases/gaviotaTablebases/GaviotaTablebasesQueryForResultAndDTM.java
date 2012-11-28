@@ -1,4 +1,4 @@
-package tablebases;
+package tablebases.gaviotaTablebases;
 
 import chess.ChessPosition;
 import chess.ChessPositionEvaluation.ChessPositionEvaluationWithDTM;

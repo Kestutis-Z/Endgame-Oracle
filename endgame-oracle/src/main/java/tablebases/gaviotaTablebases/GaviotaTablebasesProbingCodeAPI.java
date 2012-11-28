@@ -1,5 +1,6 @@
-package tablebases;
+package tablebases.gaviotaTablebases;
 
+import tablebases.EndgameTablebasesProbingCodeAPI;
 import chess.ChessPosition;
 import chess.ChessPositionEvaluation;
 import chess.ChessPositionEvaluation.ChessPositionEvaluationWithDTM;

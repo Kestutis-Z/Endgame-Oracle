@@ -1,4 +1,4 @@
-package tablebases;
+package tablebases.gaviotaTablebases;
 
 import chess.ChessPositionEvaluation;
 import chess.ChessPositionEvaluation.ChessPositionEvaluationWithDTM;
@@ -27,9 +27,9 @@ public class GaviotaTablebasesLibrary {
      * @param path
      *            full path to the directory where tablebases are located. If
      *            there are multiple paths, separate them with semicolons, for
-     *            example, "C:/tablebases/path1;C:/tablebases/path2".
+     *            example, "C:/tablebases/path1;C:/tablebases/path2"     
      */
-    public static native void initializeGaviotaTablebases(String path);
+    public static native void initializeGaviotaTablebases(String path); 
 
     /**
      * Queries the Gaviota tablebases for the game-theoretical result
