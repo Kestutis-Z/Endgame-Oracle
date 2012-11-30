@@ -17,7 +17,7 @@ public class SquareContainsNoPiecesException extends Exception {
      * pieces.
      * 
      * @param message
-     *            the detail message explaining why the exception was thrown
+     *            the message explaining why the exception was thrown
      */
     public SquareContainsNoPiecesException(String message) {
         super("\n" + message);
