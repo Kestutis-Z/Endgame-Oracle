@@ -360,7 +360,18 @@ public class ChessPosition {
 	    blackSquares.add(piecesWithSquares.get(p));
 	}
 	return blackSquares;
-    }    
+    }   
+    
+    /**
+     * Gets the square the specified piece occupies in this position.
+     * 
+     * @param piece
+     *            representation of the chess piece
+     * @return chessboard square that is occupied by the piece
+     */
+    public Square getSquareOfPiece(Piece piece) {
+	return piecesWithSquares.get(piece);
+    }
     
     /* (non-Javadoc)
      * @see java.lang.Object#hashCode()
@@ -398,6 +409,6 @@ public class ChessPosition {
 	if (sideToMove != other.sideToMove)
 	    return false;
 	return true;
-    }
+    }   
     
 }

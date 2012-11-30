@@ -305,6 +305,53 @@ public class ChessPositionTest {
 	assertFalse(chessPosition.containsPiece(Piece.WHITE_ROOK_2));
     }
 
+    @Test
+    public void testGetSquareOfPiece() throws IncorrectChessDiagramDrawingException {
+	
+	String drawing =  		
+		    "    _______________________________________________________   \n" +
+		    "   |      |      |      |      |      |      |      |      |  \n" + 
+		    "  8|  BK  |      |      |      |      |      |      |      |  \n" + 
+		    "   |______|______|______|______|______|______|______|______|  \n" + 
+		    "   |      |      |      |      |      |      |      |      |  \n" + 
+		    "  7|      |      |      |      |      |      |      |      |  \n" + 
+		    "   |______|______|______|______|______|______|______|______|  \n" + 
+		    "   |      |      |      |      |      |      |      |      |  \n" + 
+		    "  6|      |      |      |      |      |      |      |      |  \n" + 
+		    "   |______|______|______|______|______|______|______|______|  \n" + 
+		    "   |      |      |      |      |      |      |      |      |  \n" + 
+		    "  5|      |      |      |  WB  |  WB2 |      |      |      |  \n" + 
+		    "   |______|______|______|______|______|______|______|______|  \n" + 
+		    "   |      |      |      |      |      |      |      |      |  \n" + 
+		    "  4|      |      |      |      |      |      |      |  BP  |  \n" + 
+		    "   |______|______|______|______|______|______|______|______|  \n" + 
+		    "   |      |      |      |      |      |      |      |      |  \n" + 
+		    "  3|  WK  |      |      |      |      |      |      |      |  \n" + 
+		    "   |______|______|______|______|______|______|______|______|  \n" + 
+		    "   |      |      |      |      |      |      |      |      |  \n" + 
+		    "  2|      |      |      |      |      |      |      |      |  \n" + 
+		    "   |______|______|______|______|______|______|______|______|  \n" + 
+		    "   |      |      |      |      |      |      |      |      |  \n" + 
+		    "  1|      |      |      |      |      |      |      |      |  \n" + 
+		    "   |______|______|______|______|______|______|______|______|  \n" + 
+		    "      a      b      c      d      e      f      g      h      \n" ;
+	
+	ChessPositionDiagram cpDiagram = 
+		ChessPositionDiagram.createFromTextDiagram(drawing);
+	ChessPosition chessPosition = ChessPosition
+		.createFromTextualDrawing(cpDiagram, SideToMove.BLACK);
+	
+	Square expectedSquareOfWhiteBishop = Square.D5;
+	Square expectedSquareOfWhiteBishop2 = Square.E5;
+	Square expectedSquareOfBlacKing = Square.A8;
+	
+	Square actualSquareOfWhiteBishop = chessPosition.getSquareOfPiece(Piece.WHITE_BISHOP);
+	Square actualSquareOfWhiteBishop2 = chessPosition.getSquareOfPiece(Piece.WHITE_BISHOP_2);
+	Square actualSquareOfBlacKing = chessPosition.getSquareOfPiece(Piece.BLACK_KING);
+	
+	assertEquals(expectedSquareOfWhiteBishop, actualSquareOfWhiteBishop);
+	assertEquals(expectedSquareOfWhiteBishop2, actualSquareOfWhiteBishop2);
+	assertEquals(expectedSquareOfBlacKing, actualSquareOfBlacKing);
+    }
 
-    
 }
