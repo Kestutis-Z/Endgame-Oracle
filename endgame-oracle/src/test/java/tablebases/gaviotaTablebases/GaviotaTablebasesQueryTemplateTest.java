@@ -1,4 +1,4 @@
-package tablebases;
+package tablebases.gaviotaTablebases;
 
 import static org.junit.Assert.*;
 
@@ -8,6 +8,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import tablebases.Tablebase;
 import tablebases.gaviotaTablebases.GaviotaTablebasesQueryTemplate;
 
 import chess.ChessPosition;

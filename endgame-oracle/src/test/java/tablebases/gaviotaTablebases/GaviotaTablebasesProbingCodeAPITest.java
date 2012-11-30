@@ -1,4 +1,4 @@
-package tablebases;
+package tablebases.gaviotaTablebases;
 
 import static org.junit.Assert.*;
 
@@ -9,6 +9,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import tablebases.EndgameTablebasesProbingCodeAPI;
+import tablebases.Tablebase;
 import tablebases.gaviotaTablebases.GaviotaTablebasesLibrary;
 import tablebases.gaviotaTablebases.GaviotaTablebasesProbingCodeAPI;
 
