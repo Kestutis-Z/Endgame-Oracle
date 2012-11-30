@@ -324,6 +324,17 @@ public class ChessPosition {
     }
     
     /**
+     * Cheks if this position contains the specified chess piece.
+     * 
+     * @param piece
+     *            representation of the chess piece
+     * @return true, if the specified piece is present in this chess position
+     */
+    public boolean containsPiece(Piece piece) {
+	return piecesWithSquares.keySet().contains(piece);
+    }
+    
+    /**
      * Gets the list of all squares occupied by White in this chess position.
      * 
      * @return the list of squares, ordered by the value of the pieces that

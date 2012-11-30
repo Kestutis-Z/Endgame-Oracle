@@ -171,6 +171,7 @@ public class ChessPositionTest {
     
     @Test
     public void testCreateFromTextualDrawing() throws IncorrectChessDiagramDrawingException {
+	
 	String drawing =  		
 		    "    _______________________________________________________   \n" +
 		    "   |      |      |      |      |      |      |      |      |  \n" + 
@@ -225,6 +226,7 @@ public class ChessPositionTest {
     @Test(expected = IncorrectChessDiagramDrawingException.class)
     public void testCreateFromTextDiagramThrowsIncorrectChessDiagramDrawingException() 
 	    throws IncorrectChessDiagramDrawingException, InterruptedException {
+	
 	String incorrectDrawingWithTheTopShiftedOnePositionToTheRight =  
 		
 		    "     _______________________________________________________   \n" +
@@ -261,6 +263,48 @@ public class ChessPositionTest {
 	cpDiagram.wait();
     }
     
-    
+    @Test
+    public void testIfContainsPiece() throws IncorrectChessDiagramDrawingException {
+	
+	String drawing =  		
+		    "    _______________________________________________________   \n" +
+		    "   |      |      |      |      |      |      |      |      |  \n" + 
+		    "  8|      |      |      |      |      |      |      |      |  \n" + 
+		    "   |______|______|______|______|______|______|______|______|  \n" + 
+		    "   |      |      |      |      |      |      |      |      |  \n" + 
+		    "  7|      |      |      |      |      |      |      |      |  \n" + 
+		    "   |______|______|______|______|______|______|______|______|  \n" + 
+		    "   |      |      |      |      |      |      |      |      |  \n" + 
+		    "  6|      |      |      |      |      |      |      |      |  \n" + 
+		    "   |______|______|______|______|______|______|______|______|  \n" + 
+		    "   |      |      |      |      |      |      |      |      |  \n" + 
+		    "  5|      |      |      |      |  WB  |      |      |      |  \n" + 
+		    "   |______|______|______|______|______|______|______|______|  \n" + 
+		    "   |      |      |      |      |      |      |      |      |  \n" + 
+		    "  4|      |      |      |      |      |      |      |  BP  |  \n" + 
+		    "   |______|______|______|______|______|______|______|______|  \n" + 
+		    "   |      |      |      |      |      |      |      |      |  \n" + 
+		    "  3|  WK  |      |      |      |  WN  |      |      |      |  \n" + 
+		    "   |______|______|______|______|______|______|______|______|  \n" + 
+		    "   |      |      |      |      |      |      |      |      |  \n" + 
+		    "  2|      |      |      |      |      |      |  BK  |      |  \n" + 
+		    "   |______|______|______|______|______|______|______|______|  \n" + 
+		    "   |      |      |      |      |      |      |      |      |  \n" + 
+		    "  1|      |      |      |      |      |      |      |      |  \n" + 
+		    "   |______|______|______|______|______|______|______|______|  \n" + 
+		    "      a      b      c      d      e      f      g      h      \n" ;
+	
+	ChessPositionDiagram cpDiagram = 
+		ChessPositionDiagram.createFromTextDiagram(drawing);
+	ChessPosition chessPosition = ChessPosition
+		.createFromTextualDrawing(cpDiagram, SideToMove.BLACK);
+	
+	assertTrue(chessPosition.containsPiece(Piece.BLACK_KING));
+	assertTrue(chessPosition.containsPiece(Piece.WHITE_KNIGHT));
+	assertFalse(chessPosition.containsPiece(Piece.BLACK_QUEEN));
+	assertFalse(chessPosition.containsPiece(Piece.WHITE_ROOK_2));
+    }
+
+
     
 }
