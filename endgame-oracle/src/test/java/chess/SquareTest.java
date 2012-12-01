@@ -157,7 +157,7 @@ public class SquareTest {
 	expectedRange.add(Square.C1);
 	expectedRange.add(Square.D1);
 	
-	List<Square> actualRange = squareA1.rangeOfSquares(chessPosition1, Direction.EAST);
+	List<Square> actualRange = squareA1.getRangeOfSquares(chessPosition1, Direction.EAST);
 	
 	assertEquals(expectedRange, actualRange);
     }
@@ -168,7 +168,7 @@ public class SquareTest {
 	expectedRange.add(Square.F2);
 	expectedRange.add(Square.G1);
 	
-	List<Square> actualRange = squareE3.rangeOfSquares(
+	List<Square> actualRange = squareE3.getRangeOfSquares(
 		chessPosition1, Direction.SOUTHEAST);
 	
 	assertEquals(expectedRange, actualRange);
@@ -178,11 +178,11 @@ public class SquareTest {
     public void testRangeOfSquaresIsEmpty() {	
 	List<Square> expectedRange = new ArrayList<Square>();
 	
-	List<Square> actualRange = squareH8.rangeOfSquares(chessPosition1, Direction.NORTHWEST);
-	actualRange.addAll(squareH8.rangeOfSquares(chessPosition1, Direction.NORTH));
-	actualRange.addAll(squareH8.rangeOfSquares(chessPosition1, Direction.NORTHEAST));
-	actualRange.addAll(squareH8.rangeOfSquares(chessPosition1, Direction.EAST));
-	actualRange.addAll(squareH8.rangeOfSquares(chessPosition1, Direction.SOUTHEAST));
+	List<Square> actualRange = squareH8.getRangeOfSquares(chessPosition1, Direction.NORTHWEST);
+	actualRange.addAll(squareH8.getRangeOfSquares(chessPosition1, Direction.NORTH));
+	actualRange.addAll(squareH8.getRangeOfSquares(chessPosition1, Direction.NORTHEAST));
+	actualRange.addAll(squareH8.getRangeOfSquares(chessPosition1, Direction.EAST));
+	actualRange.addAll(squareH8.getRangeOfSquares(chessPosition1, Direction.SOUTHEAST));
 
 	assertEquals(expectedRange, actualRange);
     }
@@ -265,8 +265,8 @@ public class SquareTest {
     
     @Test 
     public void testSquareIsAdjacentToOtherSquare() {
-	assertTrue(squareA1.isAdjacent(Square.A2));
-	assertFalse(squareA1.isAdjacent(squareE3));
+	assertTrue(squareA1.isAdjacentTo(Square.A2));
+	assertFalse(squareA1.isAdjacentTo(squareE3));
     }
     
     @Test 

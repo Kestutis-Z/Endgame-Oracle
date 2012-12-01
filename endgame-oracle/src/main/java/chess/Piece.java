@@ -2,7 +2,12 @@ package chess;
 
 import java.util.ArrayList;
 import java.util.EnumSet;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
+import chess.Square.Direction;
+import chess.patterns.ControllerEntity;
 
 /**
  * Representation of the chess piece. A legal chess position can contain exactly
@@ -19,7 +24,7 @@ import java.util.List;
  * @author Kestutis
  * 
  */
-public enum Piece {
+public enum Piece implements ControllerEntity {
 
     WHITE_KING(PieceType.KING, PieceColour.WHITE), 
     WHITE_QUEEN(PieceType.QUEEN, PieceColour.WHITE),    
@@ -126,14 +131,117 @@ public enum Piece {
      */
     public static Piece getPieceFromAbbreviation(String abbreviation) {
 	String pieceName = "";
-	pieceName += PieceColour.getPieceColourFromAbbreviation(abbreviation.charAt(0));
+	pieceName += PieceColour.getPieceColourFromAbbreviation(abbreviation
+		.charAt(0));
 	pieceName += "_";
-	pieceName += PieceType.getPieceTypeFromAbbreviation(abbreviation.charAt(1));
+	pieceName += PieceType.getPieceTypeFromAbbreviation(abbreviation
+		.charAt(1));
 	if (abbreviation.length() == 3) {
 	    pieceName += "_";
 	    pieceName += abbreviation.charAt(2);
 	}
 	return Piece.valueOf(pieceName);
     }
+
+    /* (non-Javadoc)
+     * @see chess.patterns.ControllerEntity#getControlSquares(chess.ChessPosition)
+     */
+    @Override
+    public Set<Square> getControlSquares(ChessPosition chessPosition) {
+	if (!chessPosition.containsPiece(this))
+	    throw new IllegalArgumentException("Specified position does not "
+		    + "contain piece: " + this);
+	Set<Square> squares = new HashSet<Square>();
+	Square squareOfThisPiece = chessPosition.getSquareOfPiece(this);
+
+	switch (this.pieceType) {
+	case KING:
+	    for (Direction dir : EnumSet.allOf(Direction.class)) {
+		if (squareOfThisPiece.hasAdjacentSquareTo(dir))
+		    squares.add(squareOfThisPiece.getAdjacentSquare(dir));
+	    }
+	    return squares;
+	case QUEEN:
+	    for (Direction dir : EnumSet.allOf(Direction.class)) {
+		squares.addAll(squareOfThisPiece.getRangeOfSquares(
+			chessPosition, dir));
+	    }
+	    return squares;
+	case ROOK:
+	    squares.addAll(squareOfThisPiece.getRangeOfSquares(chessPosition,
+		    Direction.EAST));
+	    squares.addAll(squareOfThisPiece.getRangeOfSquares(chessPosition,
+		    Direction.SOUTH));
+	    squares.addAll(squareOfThisPiece.getRangeOfSquares(chessPosition,
+		    Direction.WEST));
+	    squares.addAll(squareOfThisPiece.getRangeOfSquares(chessPosition,
+		    Direction.NORTH));
+	    return squares;
+	case BISHOP:
+	    squares.addAll(squareOfThisPiece.getRangeOfSquares(chessPosition,
+		    Direction.SOUTHEAST));
+	    squares.addAll(squareOfThisPiece.getRangeOfSquares(chessPosition,
+		    Direction.SOUTHWEST));
+	    squares.addAll(squareOfThisPiece.getRangeOfSquares(chessPosition,
+		    Direction.NORTHWEST));
+	    squares.addAll(squareOfThisPiece.getRangeOfSquares(chessPosition,
+		    Direction.NORTHEAST));
+	    return squares;
+	case KNIGHT:
+	    return squaresAttackedByKnight(squareOfThisPiece);
+	case PAWN:
+	    if (this.pieceColour == PieceColour.WHITE) {
+		if (squareOfThisPiece.hasAdjacentSquareTo(Direction.NORTHWEST))
+		    squares.add(squareOfThisPiece
+			    .getAdjacentSquare(Direction.NORTHWEST));
+		if (squareOfThisPiece.hasAdjacentSquareTo(Direction.NORTHEAST))
+		    squares.add(squareOfThisPiece
+			    .getAdjacentSquare(Direction.NORTHEAST));
+	    } else if (this.pieceColour == PieceColour.BLACK) {
+		if (squareOfThisPiece.hasAdjacentSquareTo(Direction.SOUTHWEST))
+		    squares.add(squareOfThisPiece
+			    .getAdjacentSquare(Direction.SOUTHWEST));
+		if (squareOfThisPiece.hasAdjacentSquareTo(Direction.SOUTHEAST))
+		    squares.add(squareOfThisPiece
+			    .getAdjacentSquare(Direction.SOUTHEAST));
+	    }
+	    return squares;
+	default:
+	    throw new AssertionError("Unknown piece type: " + this.pieceType);
+	}	
+    }
+
+    /**
+     * Gets the squares reachable by the knight move from the specified square.
+     * 
+     * @param squareOfKnight
+     *            chessboard square that can be empty or occupied by one of the
+     *            chess pieces, including a knight
+     * @return set of squares that would be attacked by a knight if it occupied
+     *         this square
+     */
+    private Set<Square> squaresAttackedByKnight(Square squareOfKnight) {
+	Set<Square> squares = new HashSet<Square>();
+	int file = squareOfKnight.getFile();
+	int rank = squareOfKnight.getRank();
+	squares.add(file >= 7 || rank == 8 ? null 
+		: Square.getSquareFromFileAndRank(file + 2, rank + 1));
+	squares.add(file >= 7 || rank == 1 ? null 
+		: Square.getSquareFromFileAndRank(file + 2, rank - 1));
+	squares.add(file == 8 || rank >= 7 ? null 
+		: Square.getSquareFromFileAndRank(file + 1, rank + 2));
+	squares.add(file == 8 || rank <= 2 ? null 
+		: Square.getSquareFromFileAndRank(file + 1, rank - 2));
+	squares.add(file == 1 || rank >= 7 ? null 
+		: Square.getSquareFromFileAndRank(file - 1, rank + 2));
+	squares.add(file == 1 || rank <= 2 ? null 
+		: Square.getSquareFromFileAndRank(file - 1, rank - 2));
+	squares.add(file <= 2 || rank == 8 ? null 
+		: Square.getSquareFromFileAndRank(file - 2, rank + 1));
+	squares.add(file <= 2 || rank == 1 ? null 
+		: Square.getSquareFromFileAndRank(file - 2, rank - 1));
+	squares.remove(null);
+	return squares;	
+    }   
     
 }

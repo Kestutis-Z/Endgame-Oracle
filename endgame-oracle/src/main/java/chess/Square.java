@@ -204,7 +204,7 @@ public enum Square {
      *            Southeast, etc.
      * @return the list of consequtive squares (the "range")
      */
-    public List<Square> rangeOfSquares(ChessPosition chessPosition,
+    public List<Square> getRangeOfSquares(ChessPosition chessPosition,
 	    Direction direction) {
 	List<Square> squares = new ArrayList<Square>();
 	Square nextSq = this;
@@ -254,7 +254,7 @@ public enum Square {
 		    + " has " + "no adjacent square to the " + direction
 		    + " in the chess " + "position:\n\n" + chessPosition
 		    + "\n\n");
-	List<Square> range = this.rangeOfSquares(chessPosition, direction);
+	List<Square> range = this.getRangeOfSquares(chessPosition, direction);
 	return range.get(range.size() - 1);
     }
 
@@ -313,7 +313,7 @@ public enum Square {
      *            the chess pieces
      * @return true, if this and the specified squares are adjacent
      */
-    public boolean isAdjacent(Square sq) {
+    public boolean isAdjacentTo(Square sq) {
 	return Math.abs(this.getFile() - sq.getFile()) < 2
 		&& Math.abs(this.getRank() - sq.getRank()) < 2;
     }
