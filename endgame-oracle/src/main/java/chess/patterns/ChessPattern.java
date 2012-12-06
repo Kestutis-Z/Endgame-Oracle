@@ -12,7 +12,7 @@ import chess.ChessPosition;
 public interface ChessPattern {
     
     /**
-     * Checks if this pattern is present in the specified chess position..
+     * Checks if this pattern is present in the specified chess position.
      * 
      * @param chessPosition
      *            representation of the chess position: side to move (White /
@@ -20,5 +20,5 @@ public interface ChessPattern {
      * @return true, if the position contains this pattern
      */
     public abstract boolean isPresent(ChessPosition chessPosition);
-    
+       
 }
