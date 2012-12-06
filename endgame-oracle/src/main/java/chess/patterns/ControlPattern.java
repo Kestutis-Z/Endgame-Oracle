@@ -15,7 +15,10 @@ public class ControlPattern implements ChessPattern {
     private ControllerEntity controller;
     
     /** The chess entity that can be under control by some other (controller) chess entity. */
-    private ControllableEntity controllable;   
+    private ControllableEntity controllable; 
+    
+    /** The name of this pattern. */
+    private String name;
 
     /**
      * Instantiates a new control pattern.
@@ -26,16 +29,16 @@ public class ControlPattern implements ChessPattern {
      * @param controllable
      *            the chess entity that can be under control by some other
      *            (controller) chess entity
+     * @param name
+     *            the String representation of this pattern
      */
     ControlPattern(ControllerEntity controller,
-	    ControllableEntity controllable) {
+	    ControllableEntity controllable, String name) {
 	this.controller = controller;
 	this.controllable = controllable;
+	this.name = name;
     }
 
-    /* (non-Javadoc)
-     * @see chess.patterns.ChessPattern#isPresent(chess.ChessPosition)
-     */
     @Override
     public boolean isPresent(ChessPosition chessPosition) {
 	return controller.getControlSquares(chessPosition)
@@ -43,4 +46,9 @@ public class ControlPattern implements ChessPattern {
 			controllable.getControllableSquares(chessPosition));
     }
 
+    @Override
+    public String toString() {
+	return name;	
+    }
+    
 }
