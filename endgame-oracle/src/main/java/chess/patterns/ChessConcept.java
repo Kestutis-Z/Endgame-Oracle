@@ -23,4 +23,6 @@ interface ChessConcept {
      */
     abstract Set<ChessPattern> generateChessPatterns(TablebaseWithSTM tablebaseWithStm);
     
+    @Override
+    abstract String toString();
 }
