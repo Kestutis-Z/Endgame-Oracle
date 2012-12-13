@@ -11,6 +11,7 @@ import com.google.common.collect.EnumBiMap;
 
 import tablebases.Tablebase;
 
+// TODO: Auto-generated Javadoc
 /**
  * Representation of a chess position: side to move (White / Black), White and
  * Black pieces, and their respective squares.
@@ -21,12 +22,22 @@ import tablebases.Tablebase;
 public class ChessPosition { 
     
     /**
-     * Possible squares for the White King are limited to the left side of the
-     * chessboard, in order to exploit the chessboard symmetry in the d-e axis.
+     * In chess positions containing pawns, possible squares for the White King
+     * can be limited to the left side of the chessboard, in order to exploit
+     * the chessboard symmetry in the d-e axis.
      */
-    // TODO in pawnless positions, squares may be limited to the a1-d1-d4 triangle
-    public static final List<Square> WHITE_KING_SQUARES_LIST = 
-	    collectSquaresForTheWhiteKing();
+    public static final List<Square> WHITE_KING_SQUARES_LIST_FOR_POSITIONS_WITH_PAWNS = 
+	    collectSquaresForWhiteKingForPositionsWithPawns();
+    
+    /**
+     * In chess positions containing no pawns, possible squares for the White
+     * King can be limited to the a1-d1-d4 triangle of the chessboard, in order
+     * to exploit the horizontal reflection (symmetry in file d - file e axis),
+     * vertical reflection (symmetry in rank 4 - rank 5 axis), and diagonal
+     * reflection (symmetry in diagonal a1-h8).
+     */
+    public static final List<Square> WHITE_KING_SQUARES_LIST_FOR_PAWNLESS_POSITIONS = 
+	    collectSquaresForWhiteKingForPawnlessPositions();
     
     /**
      * Possible squares for the pawns are all squares on ranks 2 to 7.
@@ -41,7 +52,13 @@ public class ChessPosition {
     public static final List<Square> ALL_SQUARES_LIST = 
 	    new ArrayList<Square>(EnumSet.allOf(Square.class)); 
     
-    private static List<Square> collectSquaresForTheWhiteKing() {
+    /**
+     * Collects the squares that can be occupied by the White King in chess
+     * positions with pawns.
+     * 
+     * @return the list of squares on the left half of the chessboard
+     */
+    private static List<Square> collectSquaresForWhiteKingForPositionsWithPawns() {
 	EnumSet<Square> whiteKingSquares = 
 				EnumSet.range(Square.A1, Square.D1);
 	whiteKingSquares.addAll(EnumSet.range(Square.A2, Square.D2));
@@ -54,8 +71,51 @@ public class ChessPosition {
 	return new ArrayList<Square>(whiteKingSquares);
     }
     
-    private static final int WHITE_KING_SQUARES_COUNT = WHITE_KING_SQUARES_LIST.size();
+    /**
+     * Collects the squares that can be occupied by the White King in chess
+     * positions without pawns.
+     * 
+     * @return the list of squares in the a1-d1-d4 triangle of the chessboard
+     */
+    private static List<Square> collectSquaresForWhiteKingForPawnlessPositions() {
+	EnumSet<Square> whiteKingSquares = 
+				EnumSet.range(Square.A1, Square.D1);
+	whiteKingSquares.addAll(EnumSet.range(Square.B2, Square.D2));
+	whiteKingSquares.addAll(EnumSet.of(Square.C3, Square.D3));
+	whiteKingSquares.addAll(EnumSet.of(Square.D4));
+	return new ArrayList<Square>(whiteKingSquares);
+    }
+
+    
+    /**
+     * The constant number of different chessboard squares, that the White King
+     * can occupy in chess positions containing pawns. This constant should be
+     * equal to 32 (all the squares on the left half of the chessboard).
+     */
+    private static final int WHITE_KING_SQUARES_COUNT_FOR_POSITIONS_WITH_PAWNS = 
+	    WHITE_KING_SQUARES_LIST_FOR_POSITIONS_WITH_PAWNS.size();
+    
+    /**
+     * The constant number of different chessboard squares, that the White King
+     * can occupy in chess positions containing no pawns. This constant should
+     * be equal to 10 (all the squares in the a1-d1-d4 triangle of the
+     * chessboard).
+     */
+    private static final int WHITE_KING_SQUARES_COUNT_FOR_PAWNLESS_POSITIONS = 
+	    WHITE_KING_SQUARES_LIST_FOR_PAWNLESS_POSITIONS.size();
+    
+    /**
+     * The constant number of different chessboard squares, that a pawn can
+     * occupy in a chess position. This constant should be equal to 48 (all the
+     * 64 chessboard squares, minus 16 squares on the ranks 1 and 8).
+     */
     private static final int PAWN_SQUARES_COUNT = PAWN_SQUARES_LIST.size();
+    
+    /**
+     * The constant number of different chessboard squares, that any piece
+     * except the White King and pawns can occupy in a chess position. This
+     * constant should be equal to 64.
+     */
     private static final int ALL_SQUARES_COUNT = ALL_SQUARES_LIST.size();
     
     /**
@@ -154,7 +214,7 @@ public class ChessPosition {
      * @return representation of the chess position: side to move (White /
      *         Black), White and Black pieces, and their respective squares
      */
-    public static ChessPosition createNewChessPositionFromPiecesToSquaresBiMap(
+    public static ChessPosition createFromPiecesToSquaresBiMap(
 	    BiMap<Piece, Square> piecesWithSquares, SideToMove sideToMove) {
 	return new ChessPosition(piecesWithSquares, sideToMove);
     }   
@@ -220,8 +280,8 @@ public class ChessPosition {
 	for (Piece piece : pieces) {
 	    do {
 		if (piece == Piece.WHITE_KING) {
-		    int wkRand = numberGenerator.nextInt(WHITE_KING_SQUARES_COUNT);
-		    randSquare = WHITE_KING_SQUARES_LIST.get(wkRand);
+		    int wkRand = numberGenerator.nextInt(WHITE_KING_SQUARES_COUNT_FOR_POSITIONS_WITH_PAWNS);
+		    randSquare = WHITE_KING_SQUARES_LIST_FOR_POSITIONS_WITH_PAWNS.get(wkRand);
 		} else if (piece.getPieceType() == PieceType.PAWN) {
 		    int pRand = numberGenerator.nextInt(PAWN_SQUARES_COUNT);
 		    randSquare = PAWN_SQUARES_LIST.get(pRand);
@@ -372,7 +432,7 @@ public class ChessPosition {
     public Square getSquareOfPiece(Piece piece) {
 	return piecesWithSquares.get(piece);
     }
-    
+
     /* (non-Javadoc)
      * @see java.lang.Object#hashCode()
      */
