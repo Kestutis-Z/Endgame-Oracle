@@ -15,7 +15,7 @@ import tablebases.TablebaseWithSTM;
 public class ControlConceptTest {
 
     @Test
-    public void test() {
+    public void test_PieceControllingPiecePatternGeneration_ForKpkTablebase() {
 	TablebaseWithSTM tablebaseWithStm = 
 		new TablebaseWithSTM(Tablebase.KPK, SideToMove.BLACK);
 	
