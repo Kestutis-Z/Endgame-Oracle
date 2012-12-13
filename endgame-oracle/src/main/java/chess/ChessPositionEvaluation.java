@@ -1,24 +1,23 @@
 package chess;
 
 /**
- * The gaame-theoretical value of the chess position obtained 
- * from the tablebases. 
+ * Basic evaluation of a chess position contained in tablebases. Includes the
+ * game-theoretical value of that chess position only.
  * 
  * @author Kestutis
- *
+ * 
  */
 public enum ChessPositionEvaluation {
     
     DRAW, WHITE_WINS, BLACK_WINS, ILLEGAL, NOT_EVALUATED;
     
     
-    /** 
-     * Simple data structure representing the evaluation of 
-     * some chess position, which include the additional data 
-     * member - distance-to-mate. 
+    /**
+     * Advanced evaluation of a chess position contained in tablebases. Includes
+     * the game-theoretical value of that chess position, and distance-to-mate.
      * 
      * @author Kestutis
-     *
+     * 
      */
     public static class ChessPositionEvaluationWithDTM {
 	
