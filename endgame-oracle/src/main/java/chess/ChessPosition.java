@@ -154,8 +154,8 @@ public class ChessPosition {
      */
     private ChessPosition(Tablebase tablebase,
 	    List<Square> squares, SideToMove sideToMove) {		
-	throwExceptionIfNotAllSquaresAreDifferent(squares);
-	throwExceptionIfThereAreNotEnoughSquaresForPieces(tablebase, squares);
+	checkIfAllSquaresAreDifferent(squares);
+	checkIfThereAreEnoughSquaresForPieces(tablebase, squares);
 	
 	piecesWithSquares = EnumBiMap.create(Piece.class, Square.class);
 	List<Piece> pieces = tablebase.getAllPieces();	
@@ -163,8 +163,8 @@ public class ChessPosition {
 	    piecesWithSquares.put(pieces.get(i), squares.get(i));
 	}
 	this.sideToMove = sideToMove;
-    } 
-    
+    }
+
     /**
      * Throws exception if not all squares are different. (Two different pieces
      * cannot occupy the same square in a legal chess position).
@@ -172,10 +172,10 @@ public class ChessPosition {
      * @param squares
      *            the squares to be assigned to the pieces in the tablebase
      */
-    private void throwExceptionIfNotAllSquaresAreDifferent(List<Square> squares) {
+    private void checkIfAllSquaresAreDifferent(List<Square> squares) {
 	Set<Square> squareSet = new HashSet<Square>(squares);
 	if (squares.size() != squareSet.size()) {
-	    throw new IllegalArgumentException("Some of the squares provided " 
+	    throw new IllegalArgumentException("Some of the squares provided "
 		    + "are the same: " + squares.toString());
 	}
     }
@@ -191,7 +191,7 @@ public class ChessPosition {
      * @param squares
      *            the squares to be assigned to the pieces in the tablebase
      */
-    private void throwExceptionIfThereAreNotEnoughSquaresForPieces(
+    private void checkIfThereAreEnoughSquaresForPieces(
 	    Tablebase tablebase, List<Square> squares) {
 	if (tablebase.name().length() > squares.size()) {
 	    throw new IllegalArgumentException("Pieces from " +
