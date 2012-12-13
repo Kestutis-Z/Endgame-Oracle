@@ -11,7 +11,6 @@ import com.google.common.collect.EnumBiMap;
 
 import tablebases.Tablebase;
 
-// TODO: Auto-generated Javadoc
 /**
  * Representation of a chess position: side to move (White / Black), White and
  * Black pieces, and their respective squares.
@@ -85,7 +84,6 @@ public class ChessPosition {
 	whiteKingSquares.addAll(EnumSet.of(Square.D4));
 	return new ArrayList<Square>(whiteKingSquares);
     }
-
     
     /**
      * The constant number of different chessboard squares, that the White King
@@ -273,15 +271,25 @@ public class ChessPosition {
 	BiMap<Piece, Square> piecesWithSquares = 
 		EnumBiMap.create(Piece.class, Square.class);
 	List<Piece> pieces = tablebase.getAllPieces();
-
+	boolean positionContainsPawn = tablebase.name().contains("P");
+	
 	MersenneTwisterFast numberGenerator = new MersenneTwisterFast();
-
+	
 	Square randSquare = null;
 	for (Piece piece : pieces) {
 	    do {
 		if (piece == Piece.WHITE_KING) {
-		    int wkRand = numberGenerator.nextInt(WHITE_KING_SQUARES_COUNT_FOR_POSITIONS_WITH_PAWNS);
-		    randSquare = WHITE_KING_SQUARES_LIST_FOR_POSITIONS_WITH_PAWNS.get(wkRand);
+		    if (positionContainsPawn) {
+			int wkRand = numberGenerator
+				.nextInt(WHITE_KING_SQUARES_COUNT_FOR_POSITIONS_WITH_PAWNS);
+			randSquare = WHITE_KING_SQUARES_LIST_FOR_POSITIONS_WITH_PAWNS
+				.get(wkRand);
+		    } else {
+			int wkRand = numberGenerator
+				.nextInt(WHITE_KING_SQUARES_COUNT_FOR_PAWNLESS_POSITIONS);
+			randSquare = WHITE_KING_SQUARES_LIST_FOR_PAWNLESS_POSITIONS
+				.get(wkRand);
+		    }
 		} else if (piece.getPieceType() == PieceType.PAWN) {
 		    int pRand = numberGenerator.nextInt(PAWN_SQUARES_COUNT);
 		    randSquare = PAWN_SQUARES_LIST.get(pRand);
@@ -433,9 +441,6 @@ public class ChessPosition {
 	return piecesWithSquares.get(piece);
     }
 
-    /* (non-Javadoc)
-     * @see java.lang.Object#hashCode()
-     */
     @Override
     public int hashCode() {
 	final int prime = 31;
@@ -449,9 +454,6 @@ public class ChessPosition {
 	return result;
     }
 
-    /* (non-Javadoc)
-     * @see java.lang.Object#equals(java.lang.Object)
-     */
     @Override
     public boolean equals(Object obj) {
 	if (this == obj)
