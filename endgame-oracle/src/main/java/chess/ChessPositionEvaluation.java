@@ -13,6 +13,18 @@ public enum ChessPositionEvaluation {
     
     
     /**
+     * The kind of evaluation that can be obtained from tablebases. 
+     * 
+     * @author Kestutis
+     *
+     */
+    public enum ChessPositionEvaluationType {
+	
+	RESULT_ONLY, RESULT_AND_DISTANCE_TO_MATE;
+	
+    }
+    
+    /**
      * Advanced evaluation of a chess position contained in tablebases. Includes
      * the game-theoretical value of that chess position, and distance-to-mate.
      * 
