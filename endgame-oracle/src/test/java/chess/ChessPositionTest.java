@@ -42,7 +42,7 @@ public class ChessPositionTest {
 	piecesWithSquaresKBNKPPP.put(Piece.BLACK_PAWN_3, Square.G6);
 	
 	chessPositionFromKBNKPPP = 
-		ChessPosition.createNewChessPositionFromPiecesToSquaresBiMap(
+		ChessPosition.createFromPiecesToSquaresBiMap(
 			piecesWithSquaresKBNKPPP, SideToMove.BLACK);
 		
     }

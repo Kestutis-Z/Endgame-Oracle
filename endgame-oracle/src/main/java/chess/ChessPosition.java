@@ -1,7 +1,6 @@
 package chess;
 
 import java.util.ArrayList;
-import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -19,102 +18,6 @@ import tablebases.Tablebase;
  * 
  */
 public class ChessPosition { 
-    
-    /**
-     * In chess positions containing pawns, possible squares for the White King
-     * can be limited to the left side of the chessboard, in order to exploit
-     * the chessboard symmetry in the d-e axis.
-     */
-    public static final List<Square> WHITE_KING_SQUARES_LIST_FOR_POSITIONS_WITH_PAWNS = 
-	    collectSquaresForWhiteKingForPositionsWithPawns();
-    
-    /**
-     * In chess positions containing no pawns, possible squares for the White
-     * King can be limited to the a1-d1-d4 triangle of the chessboard, in order
-     * to exploit the horizontal reflection (symmetry in file d - file e axis),
-     * vertical reflection (symmetry in rank 4 - rank 5 axis), and diagonal
-     * reflection (symmetry in diagonal a1-h8).
-     */
-    public static final List<Square> WHITE_KING_SQUARES_LIST_FOR_PAWNLESS_POSITIONS = 
-	    collectSquaresForWhiteKingForPawnlessPositions();
-    
-    /**
-     * Possible squares for the pawns are all squares on ranks 2 to 7.
-     */
-    public static final List<Square> PAWN_SQUARES_LIST = 
-	    new ArrayList<Square>(EnumSet.range(Square.A7, Square.H2));
-    
-    /**
-     * For the pieces except the White King and the pawns, possible squares are
-     * all 64 squares of the chessboard.
-     */
-    public static final List<Square> ALL_SQUARES_LIST = 
-	    new ArrayList<Square>(EnumSet.allOf(Square.class)); 
-    
-    /**
-     * Collects the squares that can be occupied by the White King in chess
-     * positions with pawns.
-     * 
-     * @return the list of squares on the left half of the chessboard
-     */
-    private static List<Square> collectSquaresForWhiteKingForPositionsWithPawns() {
-	EnumSet<Square> whiteKingSquares = 
-				EnumSet.range(Square.A1, Square.D1);
-	whiteKingSquares.addAll(EnumSet.range(Square.A2, Square.D2));
-	whiteKingSquares.addAll(EnumSet.range(Square.A3, Square.D3));
-	whiteKingSquares.addAll(EnumSet.range(Square.A4, Square.D4));
-	whiteKingSquares.addAll(EnumSet.range(Square.A5, Square.D5));
-	whiteKingSquares.addAll(EnumSet.range(Square.A6, Square.D6));
-	whiteKingSquares.addAll(EnumSet.range(Square.A7, Square.D7));
-	whiteKingSquares.addAll(EnumSet.range(Square.A8, Square.D8));
-	return new ArrayList<Square>(whiteKingSquares);
-    }
-    
-    /**
-     * Collects the squares that can be occupied by the White King in chess
-     * positions without pawns.
-     * 
-     * @return the list of squares in the a1-d1-d4 triangle of the chessboard
-     */
-    private static List<Square> collectSquaresForWhiteKingForPawnlessPositions() {
-	EnumSet<Square> whiteKingSquares = 
-				EnumSet.range(Square.A1, Square.D1);
-	whiteKingSquares.addAll(EnumSet.range(Square.B2, Square.D2));
-	whiteKingSquares.addAll(EnumSet.of(Square.C3, Square.D3));
-	whiteKingSquares.addAll(EnumSet.of(Square.D4));
-	return new ArrayList<Square>(whiteKingSquares);
-    }
-    
-    /**
-     * The constant number of different chessboard squares, that the White King
-     * can occupy in chess positions containing pawns. This constant should be
-     * equal to 32 (all the squares on the left half of the chessboard).
-     */
-    private static final int WHITE_KING_SQUARES_COUNT_FOR_POSITIONS_WITH_PAWNS = 
-	    WHITE_KING_SQUARES_LIST_FOR_POSITIONS_WITH_PAWNS.size();
-    
-    /**
-     * The constant number of different chessboard squares, that the White King
-     * can occupy in chess positions containing no pawns. This constant should
-     * be equal to 10 (all the squares in the a1-d1-d4 triangle of the
-     * chessboard).
-     */
-    private static final int WHITE_KING_SQUARES_COUNT_FOR_PAWNLESS_POSITIONS = 
-	    WHITE_KING_SQUARES_LIST_FOR_PAWNLESS_POSITIONS.size();
-    
-    /**
-     * The constant number of different chessboard squares, that a pawn can
-     * occupy in a chess position. This constant should be equal to 48 (all the
-     * 64 chessboard squares, minus 16 squares on the ranks 1 and 8).
-     */
-    private static final int PAWN_SQUARES_COUNT = PAWN_SQUARES_LIST.size();
-    
-    /**
-     * The constant number of different chessboard squares, that any piece
-     * except the White King and pawns can occupy in a chess position. This
-     * constant should be equal to 64.
-     */
-    private static final int ALL_SQUARES_COUNT = ALL_SQUARES_LIST.size();
     
     /**
      * Bidirectional map from the pieces present in this chess 
@@ -281,21 +184,27 @@ public class ChessPosition {
 		if (piece == Piece.WHITE_KING) {
 		    if (positionContainsPawn) {
 			int wkRand = numberGenerator
-				.nextInt(WHITE_KING_SQUARES_COUNT_FOR_POSITIONS_WITH_PAWNS);
-			randSquare = WHITE_KING_SQUARES_LIST_FOR_POSITIONS_WITH_PAWNS
-				.get(wkRand);
+				.nextInt(Squares.WHITE_KING_SQUARES_FOR_POSITIONS_WITH_PAWNS
+					.numberOfSquares());
+			randSquare = Squares.WHITE_KING_SQUARES_FOR_POSITIONS_WITH_PAWNS
+				.getSquaresAsList().get(wkRand);
 		    } else {
 			int wkRand = numberGenerator
-				.nextInt(WHITE_KING_SQUARES_COUNT_FOR_PAWNLESS_POSITIONS);
-			randSquare = WHITE_KING_SQUARES_LIST_FOR_PAWNLESS_POSITIONS
-				.get(wkRand);
+				.nextInt(Squares.WHITE_KING_SQUARES_FOR_PAWNLESS_POSITIONS
+					.numberOfSquares());
+			randSquare = Squares.WHITE_KING_SQUARES_FOR_PAWNLESS_POSITIONS
+				.getSquaresAsList().get(wkRand);
 		    }
 		} else if (piece.getPieceType() == PieceType.PAWN) {
-		    int pRand = numberGenerator.nextInt(PAWN_SQUARES_COUNT);
-		    randSquare = PAWN_SQUARES_LIST.get(pRand);
+		    int pRand = numberGenerator.nextInt(Squares.PAWN_SQUARES
+			    .numberOfSquares());
+		    randSquare = Squares.PAWN_SQUARES.getSquaresAsList().get(
+			    pRand);
 		} else {
-		    int allRand = numberGenerator.nextInt(ALL_SQUARES_COUNT);
-		    randSquare = ALL_SQUARES_LIST.get(allRand);
+		    int allRand = numberGenerator.nextInt(Squares.ALL_SQUARES
+			    .numberOfSquares());
+		    randSquare = Squares.ALL_SQUARES.getSquaresAsList().get(
+			    allRand);
 		}
 	    } while (piecesWithSquares.containsValue(randSquare));
 
