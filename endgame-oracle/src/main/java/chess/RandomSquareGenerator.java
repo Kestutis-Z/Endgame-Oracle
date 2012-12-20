@@ -30,28 +30,13 @@ public class RandomSquareGenerator {
 	BiMap<Piece, Square> piecesWithSquares = EnumBiMap.create(Piece.class,
 		Square.class);
 	List<Piece> pieces = tablebase.getAllPieces();
-	boolean positionContainsPawn = tablebase.name().contains("P");
 
 	MersenneTwisterFast numberGenerator = new MersenneTwisterFast();
 
 	Square randSquare = null;
 	for (Piece piece : pieces) {
 	    do {
-		if (piece == Piece.WHITE_KING) {
-		    if (positionContainsPawn) {
-			int wkRand = numberGenerator
-				.nextInt(Squares.WHITE_KING_SQUARES_FOR_POSITIONS_WITH_PAWNS
-					.numberOfSquares());
-			randSquare = Squares.WHITE_KING_SQUARES_FOR_POSITIONS_WITH_PAWNS
-				.getSquaresAsList().get(wkRand);
-		    } else {
-			int wkRand = numberGenerator
-				.nextInt(Squares.WHITE_KING_SQUARES_FOR_PAWNLESS_POSITIONS
-					.numberOfSquares());
-			randSquare = Squares.WHITE_KING_SQUARES_FOR_PAWNLESS_POSITIONS
-				.getSquaresAsList().get(wkRand);
-		    }
-		} else if (piece.getPieceType() == PieceType.PAWN) {
+		if (piece.getPieceType() == PieceType.PAWN) {
 		    int pRand = numberGenerator.nextInt(Squares.PAWN_SQUARES
 			    .numberOfSquares());
 		    randSquare = Squares.PAWN_SQUARES.getSquaresAsList().get(
