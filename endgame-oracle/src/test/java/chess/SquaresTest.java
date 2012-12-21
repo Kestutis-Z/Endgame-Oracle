@@ -24,6 +24,14 @@ public class SquaresTest {
 	squares = Squares.WHITE_KING_SQUARES_FOR_POSITIONS_WITH_PAWNS;
 	assertEquals("Set should contain the 32 squares on the left half of the chessboard", 
 		32, squares.numberOfSquares());
+	
+	squares = Squares.DIAGONAL_A1_H8;
+	assertEquals("Set should contain the 8 squares on the A1-H8 diagonal", 
+		8, squares.numberOfSquares());
+	
+	squares = Squares.SQUARES_ABOVE_DIAGONAL_A1_H8;
+		assertEquals("Set should contain the 28 squares above the A1-H8 diagonal", 
+		28, squares.numberOfSquares());
     }
 
 }

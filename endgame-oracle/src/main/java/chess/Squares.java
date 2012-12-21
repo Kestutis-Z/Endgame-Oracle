@@ -35,6 +35,12 @@ public enum Squares {
 
     /** Possible squares for the pawns are all squares on ranks 2 to 7. */
     PAWN_SQUARES,
+    
+    /** Squares A1, B2, C3, ..., H8. */
+    DIAGONAL_A1_H8,
+    
+    /** Chessboard squares above diagonal A1-H8. */
+    SQUARES_ABOVE_DIAGONAL_A1_H8
 
     ;
 
@@ -68,19 +74,27 @@ public enum Squares {
 		    Square.A8, Square.D8));
 	    return whiteKingSquaresForPositionsWithPawns;
 	case WHITE_KING_SQUARES_FOR_PAWNLESS_POSITIONS:
-	    EnumSet<Square> whiteKingSquaresForPawnlessPositions = EnumSet.of(
-		    Square.A1, Square.B1, Square.C1, Square.D1);
-	    whiteKingSquaresForPawnlessPositions.addAll(EnumSet.of(
-		    Square.B2, Square.C2, Square.D2));
-	    whiteKingSquaresForPawnlessPositions.addAll(EnumSet.of(
-		    Square.C3, Square.D3));
-	    whiteKingSquaresForPawnlessPositions.addAll(EnumSet.of(
-		    Square.D4));
-	    return whiteKingSquaresForPawnlessPositions;
+	    return EnumSet.of(Square.A1, Square.B1, Square.C1, Square.D1,
+		    	      Square.B2, Square.C2, Square.D2,
+		    	      Square.C3, Square.D3,
+		    	      Square.D4);
 	case PAWN_SQUARES:
 	    return EnumSet.range(Square.A7, Square.H2);
+	case DIAGONAL_A1_H8:
+	    return EnumSet.of(Square.A1, Square.B2, Square.C3, Square.D4,
+		    	      Square.E5, Square.F6, Square.G7, Square.H8);
+	case SQUARES_ABOVE_DIAGONAL_A1_H8:
+	    EnumSet<Square> squaresAbove_A1_H8 = EnumSet.of(Square.A2);
+	    squaresAbove_A1_H8.addAll(EnumSet.of(   Square.A3, Square.B3));
+	    squaresAbove_A1_H8.addAll(EnumSet.range(Square.A4, Square.C4));
+	    squaresAbove_A1_H8.addAll(EnumSet.range(Square.A5, Square.D5));
+	    squaresAbove_A1_H8.addAll(EnumSet.range(Square.A6, Square.E6));
+	    squaresAbove_A1_H8.addAll(EnumSet.range(Square.A7, Square.F7));
+	    squaresAbove_A1_H8.addAll(EnumSet.range(Square.A8, Square.G8));
+	    return squaresAbove_A1_H8;
+	default:
+	    throw new AssertionError("Unknown square set type: " + this);
 	}
-	throw new AssertionError("Unknown square set type: " + this);
     }
 
     /**
