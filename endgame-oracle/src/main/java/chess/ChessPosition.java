@@ -215,12 +215,12 @@ public class ChessPosition {
     /**
      * Sets the bidirectional map: Piece <-> Square.
      * 
-     * @param piecesWithSquares
+     * @param newPiecesWithSquares
      *            bidirectional map from the pieces present in the chess
      *            position, to the squares they occupy
      */
-    public void setPiecesWithSquares(EnumBiMap<Piece, Square> piecesWithSquares) {
-        this.piecesWithSquares = piecesWithSquares;
+    public void setPiecesWithSquares(BiMap<Piece,Square> newPiecesWithSquares) {
+        this.piecesWithSquares = newPiecesWithSquares;
     }
 
     /**
