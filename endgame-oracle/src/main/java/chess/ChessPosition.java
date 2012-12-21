@@ -248,7 +248,7 @@ public class ChessPosition {
     }
     
     /**
-     * Cheks if this position contains the specified chess piece.
+     * Checks if this position contains the specified chess piece.
      * 
      * @param piece
      *            representation of the chess piece
@@ -256,7 +256,18 @@ public class ChessPosition {
      */
     public boolean containsPiece(Piece piece) {
 	return piecesWithSquares.keySet().contains(piece);
-    }
+    }    
+    
+    /**
+     * Checks if this position contains any pawns.
+     * 
+     * @return true, if there is at least one pawn in this position, false
+     *         otherwise
+     */
+    public boolean containsPawns() {
+	return piecesWithSquares.containsKey(Piece.WHITE_PAWN)
+		|| piecesWithSquares.containsKey(Piece.BLACK_PAWN);
+    }     
     
     /**
      * Gets the list of all squares occupied by White in this chess position.
@@ -327,6 +338,6 @@ public class ChessPosition {
 	if (sideToMove != other.sideToMove)
 	    return false;
 	return true;
-    }   
+    }
     
 }
