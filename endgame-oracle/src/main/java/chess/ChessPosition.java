@@ -3,6 +3,7 @@ package chess;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import com.google.common.collect.BiMap;
@@ -10,6 +11,7 @@ import com.google.common.collect.EnumBiMap;
 
 import tablebases.Tablebase;
 
+// TODO: Auto-generated Javadoc
 /**
  * Representation of a chess position: side to move (White / Black), White and
  * Black pieces, and their respective squares.
@@ -174,6 +176,30 @@ public class ChessPosition {
 	    ChessPositionDiagram drawing, SideToMove sideToMove) {
 	BiMap<Piece, Square> piecesWithSquares = drawing.getPiecesWithSquaresFromDiagram(); 
 	return new ChessPosition(piecesWithSquares, sideToMove);
+    }    
+    
+    /**
+     * Creates the deep copy of the specified chess position.
+     * 
+     * @param originalChessposition
+     *            representation of the chess position: side to move (White /
+     *            Black), White and Black pieces, and their respective squares
+     * @return new chess position with fields deep-copied from the original
+     *         position
+     */
+    public static ChessPosition createDeepCopy(
+	    ChessPosition originalChessposition) {
+	BiMap<Piece, Square> originalPiecesWithSquares = originalChessposition
+		.getPiecesWithSquares();
+	BiMap<Piece, Square> newPiecesWithSquares = EnumBiMap.create(
+		Piece.class, Square.class);
+	for (Entry<Piece, Square> originalEntry : originalPiecesWithSquares
+		.entrySet()) {
+	    newPiecesWithSquares.put(originalEntry.getKey(),
+		    originalEntry.getValue());
+	}
+	return ChessPosition.createFromPiecesToSquaresBiMap(
+		newPiecesWithSquares, originalChessposition.getSideToMove());
     }
     
     /**
@@ -308,6 +334,9 @@ public class ChessPosition {
 	return piecesWithSquares.get(piece);
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Object#hashCode()
+     */
     @Override
     public int hashCode() {
 	final int prime = 31;
@@ -321,6 +350,9 @@ public class ChessPosition {
 	return result;
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Object#equals(java.lang.Object)
+     */
     @Override
     public boolean equals(Object obj) {
 	if (this == obj)
