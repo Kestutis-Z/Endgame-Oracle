@@ -274,6 +274,18 @@ public class ChessPosition {
     }
     
     /**
+     * Gets the list of all White and Black pieces present in this chess position.
+     * 
+     * @return the list of all pieces, ordered by their value (from the
+     *         King to the pawns)
+     */
+    public List<Piece> getAllPieces() {
+	List<Piece> allPieces = new ArrayList<Piece>();
+	allPieces.addAll(piecesWithSquares.keySet());
+	return allPieces;
+    }
+    
+    /**
      * Checks if this position contains the specified chess piece.
      * 
      * @param piece
