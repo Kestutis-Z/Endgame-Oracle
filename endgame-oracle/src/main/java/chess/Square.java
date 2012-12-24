@@ -17,14 +17,14 @@ import java.util.Set;
  */
 public enum Square {
 
-    A8(18), B8(28), C8(38), D8(48), E8(58), F8(68), G8(78), H8(88), A7(17), B7(
-	    27), C7(37), D7(47), E7(57), F7(67), G7(77), H7(87), A6(16), B6(26), C6(
-	    36), D6(46), E6(56), F6(66), G6(76), H6(86), A5(15), B5(25), C5(35), D5(
-	    45), E5(55), F5(65), G5(75), H5(85), A4(14), B4(24), C4(34), D4(44), E4(
-	    54), F4(64), G4(74), H4(84), A3(13), B3(23), C3(33), D3(43), E3(53), F3(
-	    63), G3(73), H3(83), A2(12), B2(22), C2(32), D2(42), E2(52), F2(62), G2(
-	    72), H2(82), A1(11), B1(21), C1(31), D1(41), E1(51), F1(61), G1(71), H1(
-	    81);
+    A8(18), B8(28), C8(38), D8(48), E8(58), F8(68), G8(78), H8(88), 
+    A7(17), B7(27), C7(37), D7(47), E7(57), F7(67), G7(77), H7(87), 
+    A6(16), B6(26), C6(36), D6(46), E6(56), F6(66), G6(76), H6(86), 
+    A5(15), B5(25), C5(35), D5(45), E5(55), F5(65), G5(75), H5(85), 
+    A4(14), B4(24), C4(34), D4(44), E4(54), F4(64), G4(74), H4(84), 
+    A3(13), B3(23), C3(33), D3(43), E3(53), F3(63), G3(73), H3(83), 
+    A2(12), B2(22), C2(32), D2(42), E2(52), F2(62), G2(72), H2(82), 
+    A1(11), B1(21), C1(31), D1(41), E1(51), F1(61), G1(71), H1(81);
 
     /**
      * Direction from this Square to the adjacent Square - East, Southeast, etc.
@@ -316,6 +316,26 @@ public enum Square {
     public boolean isAdjacentTo(Square sq) {
 	return Math.abs(this.getFile() - sq.getFile()) < 2
 		&& Math.abs(this.getRank() - sq.getRank()) < 2;
+    }
+    
+    /**
+     * Checks if this square is below the A1-H8 diagonal.
+     * 
+     * @return true, if this square is below the diagonal A1-H8; false if it is
+     *         on, or above A1-H8
+     */
+    public boolean isBelowDiagonal_A1_H8() {
+	return this.getRank() < this.getFile();
+    }
+
+    /**
+     * Checks if this square is above the A1-H8 diagonal.
+     * 
+     * @return true, if this square is above the diagonal A1-H8; false if it is
+     *         on, or below A1-H8
+     */
+    public boolean isAboveDiagonal_A1_H8() {
+	return this.getRank() > this.getFile();
     }
 
     /**
