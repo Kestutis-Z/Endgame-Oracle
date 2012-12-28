@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 import chess.Square.Direction;
+import chess.patterns.ControllableEntity;
 import chess.patterns.ControllerEntity;
 
 /**
@@ -24,7 +25,7 @@ import chess.patterns.ControllerEntity;
  * @author Kestutis
  * 
  */
-public enum Piece implements ControllerEntity {
+public enum Piece implements ControllerEntity, ControllableEntity {
 
     WHITE_KING(PieceType.KING, PieceColour.WHITE), 
     WHITE_QUEEN(PieceType.QUEEN, PieceColour.WHITE),    
@@ -242,6 +243,22 @@ public enum Piece implements ControllerEntity {
 		: Square.getSquareFromFileAndRank(file - 2, rank - 1));
 	squares.remove(null);
 	return squares;	
+    }
+
+    /**
+     * Cheks if this piece is a duplicate, i.e., if it's name ends with a digit.
+     * 
+     * @return true, if the last character of this piece's name is a digit
+     */
+    public boolean isDuplicate() {
+	String pieceName = this.name();
+	return Character.isDigit(pieceName.charAt(pieceName.length() - 1));
+    }
+
+    @Override
+    public Set<Square> getControllableSquares(ChessPosition chessPosition) {
+	// TODO Auto-generated method stub
+	return null;
     }   
     
 }

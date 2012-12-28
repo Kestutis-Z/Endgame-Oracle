@@ -239,4 +239,10 @@ public class PieceTest {
 	assertEquals(expectedAttackSquares_BP, actualAttackSquares_BP);
     }
     
+    @Test
+    public void testIfPieceIsDuplicate() {
+	assertTrue(Piece.BLACK_BISHOP_2.isDuplicate());
+	assertFalse(Piece.BLACK_QUEEN.isDuplicate());
+    }
+    
 }
