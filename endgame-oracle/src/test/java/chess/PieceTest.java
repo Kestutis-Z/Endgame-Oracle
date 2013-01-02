@@ -189,7 +189,7 @@ public class PieceTest {
 	Set<Square> expectedAttackSquares_WN = new HashSet<>();
 	expectedAttackSquares_WN.add(Square.F2);
 	expectedAttackSquares_WN.add(Square.G3);
-	Set<Square> actualAttackSquares_WN = Piece.WHITE_KNIGHT.getControlSquares(chessPosition);
+	Set<Square> actualAttackSquares_WN = Piece.WHITE_KNIGHT_2.getControlSquares(chessPosition);
 	assertEquals(expectedAttackSquares_WN, actualAttackSquares_WN);
 	
 	Set<Square> expectedAttackSquares_WN2 = new HashSet<>();
@@ -199,7 +199,7 @@ public class PieceTest {
 	expectedAttackSquares_WN2.add(Square.F7);
 	expectedAttackSquares_WN2.add(Square.H3);
 	expectedAttackSquares_WN2.add(Square.H7);
-	Set<Square> actualAttackSquares_WN2 = Piece.WHITE_KNIGHT_2.getControlSquares(chessPosition);
+	Set<Square> actualAttackSquares_WN2 = Piece.WHITE_KNIGHT.getControlSquares(chessPosition);
 	assertEquals(expectedAttackSquares_WN2, actualAttackSquares_WN2);
 	
 	Set<Square> expectedAttackSquares_BN = new HashSet<>();
@@ -224,13 +224,13 @@ public class PieceTest {
 	Set<Square> expectedAttackSquares_WP = new HashSet<>();
 	expectedAttackSquares_WP.add(Square.E5);
 	expectedAttackSquares_WP.add(Square.G5);
-	Set<Square> actualAttackSquares_WP = Piece.WHITE_PAWN.getControlSquares(chessPosition);
+	Set<Square> actualAttackSquares_WP = Piece.WHITE_PAWN_2.getControlSquares(chessPosition);
 	assertEquals(expectedAttackSquares_WP, actualAttackSquares_WP);
 	
 	Set<Square> expectedAttackSquares_WP2 = new HashSet<>();
 	expectedAttackSquares_WP2.add(Square.D3);
 	expectedAttackSquares_WP2.add(Square.F3);
-	Set<Square> actualAttackSquares_WP2 = Piece.WHITE_PAWN_2.getControlSquares(chessPosition);
+	Set<Square> actualAttackSquares_WP2 = Piece.WHITE_PAWN.getControlSquares(chessPosition);
 	assertEquals(expectedAttackSquares_WP2, actualAttackSquares_WP2);
 	
 	Set<Square> expectedAttackSquares_BP = new HashSet<>();

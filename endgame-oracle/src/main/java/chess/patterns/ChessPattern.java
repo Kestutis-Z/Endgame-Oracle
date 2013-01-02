@@ -19,6 +19,6 @@ public interface ChessPattern {
      *            Black), White and Black pieces, and their respective squares
      * @return true, if the position contains this pattern
      */
-    public abstract boolean isPresent(ChessPosition chessPosition);
-       
+    public abstract boolean isPresent(ChessPosition chessPosition);       
+    
 }
