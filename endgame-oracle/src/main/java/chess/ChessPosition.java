@@ -28,17 +28,10 @@ public class ChessPosition {
     
     /** The side to move - White or Black. */
     private SideToMove sideToMove;
-    
+
     /**
      * Instantiates a new chess position given the Piece <--> Square bimap and
-     * side-to-move arguments. <br/><br/>
-     * If the bimap argument has two or more duplicate pieces (pieces of the
-     * same piece type and piece colour) as keys, it is required that the IDs of
-     * the squares corresponding to those pieces do follow the same ordering as
-     * the pieces themselves. So if the incorrectly ordered bimap argument is
-     * passed, a new bimap with rearranged squares is created and used for the
-     * instantiation instead of the original bimap argument (this is necessary
-     * for consistency, e.g., for the equals method to work properly).
+     * side-to-move arguments.
      * 
      * @param piecesWithSquares
      *            bidirectional map from the pieces present in this chess
@@ -48,11 +41,31 @@ public class ChessPosition {
      */
     private ChessPosition(BiMap<Piece, Square> piecesWithSquares,
 	    SideToMove sideToMove) {
+	setPiecesWithSquares(piecesWithSquares);
+	this.sideToMove = sideToMove;
+    }
+
+    /**
+     * Sets the bidirectional map: Piece <-> Square. 
+     * <br/>
+     * <br/>
+     * If the bimap argument has two or more duplicate pieces (pieces of the
+     * same piece type and piece colour) as keys, it is required that the IDs of
+     * the squares corresponding to those pieces do follow the same ordering as
+     * the pieces themselves. So if the incorrectly ordered bimap argument is
+     * passed, a new bimap with rearranged squares is created and used instead
+     * of the original bimap argument (this is necessary for consistency, e.g.,
+     * for the equals method to work properly).
+     * 
+     * @param piecesWithSquares
+     *            bidirectional map from the pieces present in the chess
+     *            position, to the squares they occupy
+     */
+    public void setPiecesWithSquares(BiMap<Piece, Square> piecesWithSquares) {
 	this.piecesWithSquares = containsDuplicatePieces(piecesWithSquares) 
 		? rearrangedPiecesWithSquares(piecesWithSquares)
 		: piecesWithSquares;
-	this.sideToMove = sideToMove;
-    }   
+    }
 
     /**
      * Checks if this position contains any duplicate pieces.
@@ -280,17 +293,6 @@ public class ChessPosition {
      */
     public BiMap<Piece, Square> getPiecesWithSquares() {
         return piecesWithSquares;
-    }
-
-    /**
-     * Sets the bidirectional map: Piece <-> Square.
-     * 
-     * @param newPiecesWithSquares
-     *            bidirectional map from the pieces present in the chess
-     *            position, to the squares they occupy
-     */
-    public void setPiecesWithSquares(BiMap<Piece, Square> newPiecesWithSquares) {
-	this.piecesWithSquares = newPiecesWithSquares;
     }
 
     /**
