@@ -11,7 +11,6 @@ import com.google.common.collect.EnumBiMap;
 
 import tablebases.Tablebase;
 
-// TODO: Auto-generated Javadoc
 /**
  * Representation of a chess position: side to move (White / Black), White and
  * Black pieces, and their respective squares.
@@ -31,7 +30,15 @@ public class ChessPosition {
     private SideToMove sideToMove;
     
     /**
-     * Instantiates a new chess position.
+     * Instantiates a new chess position given the Piece <--> Square bimap and
+     * side-to-move arguments. <br/><br/>
+     * If the bimap argument has two or more duplicate pieces (pieces of the
+     * same piece type and piece colour) as keys, it is required that the IDs of
+     * the squares corresponding to those pieces do follow the same ordering as
+     * the pieces themselves. So if the incorrectly ordered bimap argument is
+     * passed, a new bimap with rearranged squares is created and used for the
+     * instantiation instead of the original bimap argument (this is necessary
+     * for consistency, e.g., for the equals method to work properly).
      * 
      * @param piecesWithSquares
      *            bidirectional map from the pieces present in this chess
@@ -41,9 +48,71 @@ public class ChessPosition {
      */
     private ChessPosition(BiMap<Piece, Square> piecesWithSquares,
 	    SideToMove sideToMove) {
-	this.piecesWithSquares = piecesWithSquares;
+	this.piecesWithSquares = containsDuplicatePieces(piecesWithSquares) 
+		? rearrangedPiecesWithSquares(piecesWithSquares)
+		: piecesWithSquares;
 	this.sideToMove = sideToMove;
     }   
+
+    /**
+     * Checks if this position contains any duplicate pieces.
+     * 
+     * @param piecesWithSquares
+     *            bidirectional map from the pieces present in the chess
+     *            position, to the squares they occupy
+     * @return true, if there are at least two same-type, same-colour pieces in
+     *         this position
+     */
+    private boolean containsDuplicatePieces(
+	    BiMap<Piece, Square> piecesWithSquares) {
+	for (Piece piece : piecesWithSquares.keySet()) {
+	    if (piece.isDuplicate())
+		return true;
+	}
+	return false;
+    }
+
+    /**
+     * Checks if the squares of duplicate pieces (pieces of the same piece type
+     * and piece colour) are "in order", that is, if the ordering of their IDs
+     * is the same as the ordering of those duplicate pieces. If so, the
+     * original bimap is returned; otherwise a new bimap with the squares
+     * reordered is created and returned.
+     * 
+     * @param originalPiecesWithSquares
+     *            the original pieces with squares
+     * @return the Piece <--> Square bimap with a guaranteed correct ordering of
+     *         squares for duplicate pieces squares for duplicate pieces
+     */
+    private BiMap<Piece, Square> rearrangedPiecesWithSquares(
+	    BiMap<Piece, Square> originalPiecesWithSquares) {
+	EnumBiMap<Piece, Square> newPiecesWithSquares = EnumBiMap.create(
+		Piece.class, Square.class);
+	Set<Piece> pieces = originalPiecesWithSquares.keySet();
+	List<Piece> pieceList = new ArrayList<>();
+	List<Square> squareList = new ArrayList<>();
+	for (Piece p : pieces) {
+	    pieceList.add(p);
+	    squareList.add(originalPiecesWithSquares.get(p));
+	}
+	for (int i = 1; i < pieceList.size(); i++) {
+	    Piece currentPiece = pieceList.get(i);
+	    if (currentPiece.isDuplicate()) {
+		Square currentSquare = squareList.get(i);
+		Square previousSquare = squareList.get(i - 1);
+		if (currentSquare.getSquareID() < previousSquare.getSquareID()) {
+		    squareList.set(i - 1, currentSquare);
+		    squareList.set(i, previousSquare);
+		    for (int j = 0; j < pieceList.size(); j++) {
+			newPiecesWithSquares.put(pieceList.get(j),
+				squareList.get(j));
+		    }
+		    return rearrangedPiecesWithSquares(newPiecesWithSquares);
+		}
+	    }
+	}
+	return originalPiecesWithSquares;
+    }
 
     /**
      * Instantiates a new chess position.
@@ -120,11 +189,11 @@ public class ChessPosition {
     public static ChessPosition createFromPiecesToSquaresBiMap(
 	    BiMap<Piece, Square> piecesWithSquares, SideToMove sideToMove) {
 	return new ChessPosition(piecesWithSquares, sideToMove);
-    }   
+    }
 
     /**
-     * Creates a new chess position using the provided tablebase and the list
-     * of squares for the pieces.
+     * Creates a new chess position using the provided tablebase and the list of
+     * squares for the pieces.
      * 
      * @param tablebase
      *            computerized database containing all possible legal chess
@@ -141,7 +210,7 @@ public class ChessPosition {
 	    List<Square> squares, SideToMove sideToMove) {
 	return new ChessPosition(tablebase, squares, sideToMove);
     }
-    
+
     /**
      * Creates a new chess position using the provided tablebase. The squares
      * for the pieces are chosen randomly.
@@ -155,8 +224,8 @@ public class ChessPosition {
      * @return representation of the chess position: side to move (White /
      *         Black), White and Black pieces, and their respective squares
      */
-    public static ChessPosition createRandomFromTablebase(
-	    Tablebase tablebase, SideToMove sideToMove) {
+    public static ChessPosition createRandomFromTablebase(Tablebase tablebase,
+	    SideToMove sideToMove) {
 	BiMap<Piece, Square> piecesWithSquares = RandomSquareGenerator
 		.generateRandomSquaresForPieces(tablebase);
 	return new ChessPosition(piecesWithSquares, sideToMove);	
@@ -174,10 +243,11 @@ public class ChessPosition {
      */
     public static ChessPosition createFromTextualDrawing(
 	    ChessPositionDiagram drawing, SideToMove sideToMove) {
-	BiMap<Piece, Square> piecesWithSquares = drawing.getPiecesWithSquaresFromDiagram(); 
+	BiMap<Piece, Square> piecesWithSquares = drawing
+		.getPiecesWithSquaresFromDiagram();
 	return new ChessPosition(piecesWithSquares, sideToMove);
-    }    
-    
+    }
+
     /**
      * Creates the deep copy of the specified chess position.
      * 
@@ -219,8 +289,8 @@ public class ChessPosition {
      *            bidirectional map from the pieces present in the chess
      *            position, to the squares they occupy
      */
-    public void setPiecesWithSquares(BiMap<Piece,Square> newPiecesWithSquares) {
-        this.piecesWithSquares = newPiecesWithSquares;
+    public void setPiecesWithSquares(BiMap<Piece, Square> newPiecesWithSquares) {
+	this.piecesWithSquares = newPiecesWithSquares;
     }
 
     /**
@@ -229,7 +299,7 @@ public class ChessPosition {
      * @return the side to make a move (either White, or Black)
      */
     public SideToMove getSideToMove() {
-        return sideToMove;
+	return sideToMove;
     }
 
     /**
@@ -239,7 +309,7 @@ public class ChessPosition {
      *            the new side-to-move (either White, or Black)
      */
     public void setSideToMove(SideToMove sideToMove) {
-        this.sideToMove = sideToMove;
+	this.sideToMove = sideToMove;
     }
 
     /**
@@ -252,7 +322,7 @@ public class ChessPosition {
 	List<Piece> whitePieces = new ArrayList<Piece>();
 	for (Piece p : piecesWithSquares.keySet()) {
 	    if (p == Piece.BLACK_KING)
-		break;	    
+		break;
 	    whitePieces.add(p);
 	}
 	return whitePieces;
@@ -333,8 +403,8 @@ public class ChessPosition {
 	    blackSquares.add(piecesWithSquares.get(p));
 	}
 	return blackSquares;
-    }   
-    
+    }
+
     /**
      * Gets the square the specified piece occupies in this position.
      * 
